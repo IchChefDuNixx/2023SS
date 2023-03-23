@@ -19,7 +19,6 @@ public class Decryption {
      * @return symmetric SecretKey
      */
     public static SecretKey readKey(String inputFile) throws IOException {
-        // TODO: done
         return new SecretKeySpec(FileUtils.readFromFileBase64(inputFile), ALGORITHM);
     }
 
@@ -30,10 +29,10 @@ public class Decryption {
      * @param data byte Array to decrypt
      * @return decrypted data
      */
-    public static byte[] decrypt(SecretKey key, byte[] data) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-        // TODO: done
+    public static byte[] decrypt(SecretKey key, byte[] data) throws NoSuchPaddingException, NoSuchAlgorithmException,
+            InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
         Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
-        cipher.init(Cipher.ENCRYPT_MODE, key);
+        cipher.init(Cipher.DECRYPT_MODE, key);
 
         return cipher.doFinal(data);
     }

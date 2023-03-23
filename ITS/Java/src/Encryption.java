@@ -2,8 +2,7 @@ import javax.crypto.*;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-
+//import java.security.SecureRandom;
 
 public class Encryption {
 
@@ -20,11 +19,10 @@ public class Encryption {
      * @return symmetric SecretKey
      */
     public static SecretKey generateKey() throws NoSuchAlgorithmException {
-        // TODO: done
         KeyGenerator keygen = KeyGenerator.getInstance(ALGORITHM);
         keygen.init(KEY_SIZE);
 
-        return keygen.generateKey(); 
+        return keygen.generateKey();
     }
 
     /**
@@ -34,12 +32,12 @@ public class Encryption {
      * @param data byte Array to encrypt
      * @return encrypted data
      */
-    public static byte[] encrypt(SecretKey key, byte[] data) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-        // TODO: done
+    public static byte[] encrypt(SecretKey key, byte[] data) throws NoSuchPaddingException, NoSuchAlgorithmException,
+            InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
         Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
         cipher.init(Cipher.ENCRYPT_MODE, key);
 
-        return cipher.doFinal(data); //.update for bigger data
+        return cipher.doFinal(data); // .update for bigger data
     }
 
     /**
@@ -50,7 +48,7 @@ public class Encryption {
      */
     public static void saveKey(String destFile, SecretKey key) throws IOException {
         // TODO: WIP, writeToFile?
-        FileUtils.writeToFileBase64("filename", key.getEncoded());
+        FileUtils.writeToFileBase64(destFile, key.getEncoded());
 
     }
 }

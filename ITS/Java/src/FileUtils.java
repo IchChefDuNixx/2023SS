@@ -37,9 +37,7 @@ public class FileUtils {
      * @return decoded contents of file
      */
     public static byte[] readFromFileBase64(String inputFile) throws IOException {
-        // TODO
-
-        return null;
+        return Base64.getDecoder().decode(readFromFile(inputFile));
     }
 
     /**
@@ -49,6 +47,7 @@ public class FileUtils {
      * @param data     byte Array to encode and save
      */
     public static void writeToFileBase64(String destFile, byte[] data) throws IOException {
-        // TODO
+        byte[] byteArr = Base64.getEncoder().encode(data);
+        writeToFile(destFile, byteArr);
     }
 }
