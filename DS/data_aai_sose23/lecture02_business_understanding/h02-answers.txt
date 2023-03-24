@@ -1,0 +1,29 @@
+Questions for Chapter 1
+
+§What is the difference between Data Science and Data Mining?
+-Data Science is a set of rules and techniques to extract useful information from given data while Data Mining is the process of applying these methods in practice.
+
+§Why does it make sense to understand data-analytic thinking even if you do not intend to apply Data Science yourself?
+-Because you will very likely interact with people from this field and it's beneficial to understand and gauge their actions to some degree. Also potential competitors will likely use Data Science, which indirectly involves you by giving you a disadvantage.
+
+§The book discusses how Wal-Mart applied data science when a Hurricane was on it's way to Florida. Discuss why this might be useful and what they gained from this project.
+-One net positive aspect was that they were able to stock up on necessities before the storm hit and thereby help the affected people. Though since it's a company, Data Science is also gonna be used to squeeze money out of customers where possible. For example by hiking prices on highly desired products in dire situations
+
+§What is "customer churn" and why is a problem (in many industries, but specifically for mobile telecommunication providers)?
+-It's when customers decide to move on (possibly to a competitor) after some period of time or a specific event. Losing customers first of all means a loss of revenue but even worse, it creates higher costs for aquiring a new one (as a replacement)
+
+§What does DDD stand for? Explain the concept. Why would a company want to employ DDD?
+-DDD=DDDM, data-driven decision-making. By emplying DDDM, the responsible executive or manager partially or fully depends their decisions on given data instead of their experience and intuition. It is shown that doing so, increases a company's overall output and profit. Likely bc hard facts are better than human brains (sometimes)
+
+§Why does data science overlap with DDD and not just support it
+-As stated in the first answer, Data Science is more of an abstraction and theory while DDDM is done by using parts of it in combination with other (business) aspects
+
+§What does Big Data mean?
+-Data becomes Big Data when the Data is too big FiveHead (too big for conventional data mining systems)
+
+§Explain how Signet Bank gained a significant competitive advantage by investing in data!
+-They gained insight into the behaviour of their customers and how they could effectively tailor conditions for individuals such that the bank has the highest possible profits
+
+§Give an example for the Fundamental concept: "Formulating data mining solutions and evaluating the results involves thinking carefully about the context in which they will be used."
+-It is important to know what exact information is useful to determine your goal. If MegaTelCo wants to reduce churning, they first have to collect all possible data and then figure out, which features predict a customer leaving best. If they were to use the same features in another application, the results will likely be bad.
+

@@ -1,9 +1,9 @@
 # single perceptron training for 2 linearly separable classes
-
+# %%
 import numpy as np
 import matplotlib.pyplot as plt
 
-
+# %%
 # generate random data points with labels for two linearly separable classes and plot it
 # numvals = number of samples per class
 # returns data in trainIN, size 2*numvals X 3
@@ -42,8 +42,11 @@ def generate_train_data(numvals):
 # compute output of perceptron with step function as activation
 def perceptron_out(weights, sample):
     # todo: add cour code here
-    y = 0   # change/remove
-    return y
+    sum = np.dot(weights.T,sample)
+    if sum > 0:
+        return 1
+    else:
+        return 0
 
 
 # compute MRSE for evaluation
@@ -82,7 +85,7 @@ def main():
     alpha = 0.1
 
     # init of weights - NEVER use zero for an MLP (it does work with a single perceptron though)
-    weights = np.array([0, 0, 0])
+    weights = np.array([0, 0, 0], dtype="float64")
     maxiterations = 10  # maximum number of iterations for training
 
     # generate random data points with labels
@@ -97,16 +100,33 @@ def main():
         print("weights ", weights)
 
         # todo: add your training code here
+        
+        weights_changed = False
+        
+        for x,y in zip(train_in, trainlabels):
+            out = perceptron_out(weights, x)
+            residual = y - out
+            if residual != 0:
+                weights += alpha * residual * x
+                weights_changed = True
+
+
+
         i = i + 1
 
     # just a check: after training, the Mean Root Square Error (MRSE) should be zero on training data
     # (try generating test data and evaluate on that!)
     print('MRSE:', compute_mrse(train_in, trainlabels, weights))
 
-    line = np.array([1, 1, 0])   # todo: insert correct line parameters
-    plot_line(-2, 6, -2, 6, line)
+    # todo: insert correct line parameters
+    line = np.array([1, 1, 0])
+    line = weights
+
+    plot_line(-2,6, -2,6, line)
     plt.show()
 
 
 if __name__ == '__main__':
     main()
+
+# %%
