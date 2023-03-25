@@ -5,25 +5,63 @@ Questions for Chapter 1
 
 §Why does it make sense to understand data-analytic thinking even if you do not intend to apply Data Science yourself?
 -Because you will very likely interact with people from this field and it's beneficial to understand and gauge their actions to some degree. Also potential competitors will likely use Data Science, which indirectly involves you by giving you a disadvantage.
+ data analytic thinking enables you to evaluate proposed data mining projects. you should be able to spot obvious flaws, unrealistic assumptions or missing pieces.
 
 §The book discusses how Wal-Mart applied data science when a Hurricane was on it's way to Florida. Discuss why this might be useful and what they gained from this project.
--One net positive aspect was that they were able to stock up on necessities before the storm hit and thereby help the affected people. Though since it's a company, Data Science is also gonna be used to squeeze money out of customers where possible. For example by hiking prices on highly desired products in dire situations
+-One net positive aspect was that they were able to stock up on necessities and unexpectedly desired items before the storm hit and thereby help the affected people. Though since it's a company, Data Science is also gonna be used to squeeze money out of customers where possible. For example by hiking prices on highly desired products in dire situations
 
 §What is "customer churn" and why is a problem (in many industries, but specifically for mobile telecommunication providers)?
 -It's when customers decide to move on (possibly to a competitor) after some period of time or a specific event. Losing customers first of all means a loss of revenue but even worse, it creates higher costs for aquiring a new one (as a replacement)
 
 §What does DDD stand for? Explain the concept. Why would a company want to employ DDD?
--DDD=DDDM, data-driven decision-making. By emplying DDDM, the responsible executive or manager partially or fully depends their decisions on given data instead of their experience and intuition. It is shown that doing so, increases a company's overall output and profit. Likely bc hard facts are better than human brains (sometimes)
+-DDD=DDDM, data-driven decision-making. By employing DDDM, the responsible executive or manager partially or fully depends their decisions on given data instead of their experience and intuition. It is shown that doing so, increases a company's overall output and profit. Likely bc hard facts are better than human brains (sometimes)
 
 §Why does data science overlap with DDD and not just support it
--As stated in the first answer, Data Science is more of an abstraction and theory while DDDM is done by using parts of it in combination with other (business) aspects
+-As stated in the first answer, Data Science is more of an abstraction and theory while DDDM is done by using parts of it in combination with other (business) aspects.
 
 §What does Big Data mean?
 -Data becomes Big Data when the Data is too big FiveHead (too big for conventional data mining systems)
 
 §Explain how Signet Bank gained a significant competitive advantage by investing in data!
--They gained insight into the behaviour of their customers and how they could effectively tailor conditions for individuals such that the bank has the highest possible profits
+-They gained insight into the behaviour of their customers and how they could effectively tailor conditions for individuals such that the bank has the highest possible profits.
 
 §Give an example for the Fundamental concept: "Formulating data mining solutions and evaluating the results involves thinking carefully about the context in which they will be used."
--It is important to know what exact information is useful to determine your goal. If MegaTelCo wants to reduce churning, they first have to collect all possible data and then figure out, which features predict a customer leaving best. If they were to use the same features in another application, the results will likely be bad.
+-It is important to know what exact information is useful to determine your goal. If MegaTelCo wants to reduce churning, they first have to collect all possible data and then figure out, which features predict a customer leaving best. If they were to use the same features in another application, the results will likely be bad. also compare the results to some sort of default
+
+
+
+Questions for Chapter 2
+
+§Why do we want to decompose a data-analytics problem and into what kind of pieces?
+-Decomposing it into subtasks and looking at them separately, you may find that some of them only require re-use of existing solutions or trivial work. Therefore, composing a big task correctly may save time and effort or even improve the result. Also it makes working on different parts simultaneously possible.
+
+§Explain the tasks "classification" and "scoring" and how they relate to each other!
+-A classification model is used to see which known group an individual belongs to. These can be categorical and mutually exclusive. Using a scoring model to analyze new data, you get, for example, a likelihood that this individual will do something instead of yes/no.
+
+§What is the difference between Classification and Regression?
+-Classification models usually output a single number, representing the class while Regression models output results from the real numbers, which can be interpreted as ratios or probabilites.
+
+§What does Clustering do?
+-clustering creates groups of entities. it can be supervised or unsupervised. the amount of groups and their usefulness depends on the given data or the goal. Afterwards you should know which entities are likely to act similar to others and which aren't.
+
+§Describe the difference between supervised and unsupervised learning. Give one example for method for each type.
+-supervised learning requires labels. eg in fraug detection, where you train your model on known good or known fraudulent transactions with the goal to predict which class a new transaction belongs to. anomaly detection.
+ unsupervised learning doesn't use labels and only tries to find patterns or groups within a set of data. the interpretation of the results needs domain knowledge. clustering.
+
+§What are the two phases of a machine learning/data mining system, and what is done in each of them?
+-training and testing/deployment.
+
+§Draw the CRISP DM process.
+-cycle(Business understanding, data understanding, data preparation, modelling, evaluation) -> deployment.
+
+§Explain each step of the CRISP DM process in 1-2 sentences in your own words.
+1. you need domain knowledge and knowledge about how the company operates, as well as what the goal is. divide the project into data science problems.
+2. you need to know the structure, depth and diversity of the data. only with accurate and reliable data, your model can be good. aquire more data if necessary.
+3. if the given data is not yet in a suitable format or has issues, this is where you try to extract the most important information and bring everything together, such that a model can be trained on it.
+4. here you select your model architecture, train and finalize it.
+5. with a finished model, you still need to test whether it is achieving your goals or not. be it by beating good heuristics or other measures. maybe also real world tests.
+6. if the model is good enough and reliable, you need to install it into your production systems, maintain it and move on.
+
+§Explain the difference between explanatory modelling and predictive modelling for regression analysis.
+-explanatory modelling tries to find patterns in known data while predictive modelling tries to generalize and apply these patterns to new data points.
 
