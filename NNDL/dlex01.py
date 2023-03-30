@@ -42,7 +42,7 @@ def generate_train_data(numvals):
 # compute output of perceptron with step function as activation
 def perceptron_out(weights, sample):
     # todo: add cour code here
-    sum = np.dot(weights.T,sample)
+    sum = np.dot(weights,sample)
     if sum > 0:
         return 1
     else:
@@ -89,7 +89,7 @@ def main():
     maxiterations = 10  # maximum number of iterations for training
 
     # generate random data points with labels
-    train_in, trainlabels = generate_train_data(100)
+    train_in, trainlabels = generate_train_data(1000)
 
     # perceptron training
     weights_changed = True
@@ -110,8 +110,6 @@ def main():
                 weights += alpha * residual * x
                 weights_changed = True
 
-
-
         i = i + 1
 
     # just a check: after training, the Mean Root Square Error (MRSE) should be zero on training data
@@ -120,7 +118,10 @@ def main():
 
     # todo: insert correct line parameters
     line = np.array([1, 1, 0])
-    line = weights
+    line = np.array([weights[1], weights[2], -weights[0]])
+    # ax + by + c = 0
+    # w1*x + w2*y + -1*w0
+    # = w1*x + w2*y - w0
 
     plot_line(-2,6, -2,6, line)
     plt.show()
