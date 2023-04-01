@@ -1,5 +1,7 @@
 package PackageName;
 
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -8,6 +10,7 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.GCMParameterSpec;
 
 public class EncryptAesGcm {
     private static final String CIPHER_ALG = "AES/GCM/NoPadding";
@@ -15,9 +18,6 @@ public class EncryptAesGcm {
     private static final int IV_LENGTH_BYTE = 12; // 96 bit
 
     private EncryptAesGcm() throws NoSuchAlgorithmException {
-        SecretKey key = CryptoUtils.generateAESKey();
-        byte[] IV = new byte[IV_LENGTH_BYTE];
-
     }
 
     /**
@@ -32,14 +32,20 @@ public class EncryptAesGcm {
      * @throws InvalidKeyException
      * @throws BadPaddingException
      * @throws IllegalBlockSizeException
+     * @throws InvalidAlgorithmParameterException
+     * @throws IOException
      */
     public static byte[] encrypt(byte[] plainText, byte[] authenticationData, SecretKey key)
             throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException,
-            BadPaddingException {
-        // TODO:
+            BadPaddingException, InvalidAlgorithmParameterException, IOException {
+        // TODO: done
         Cipher cipher = Cipher.getInstance(CIPHER_ALG);
-        cipher.init(IV_LENGTH_BYTE, key);
 
-        return cipher.doFinal(plainText);
+        byte[] iv = CryptoUtils.getRandomNonce(IV_LENGTH_BYTE);
+        cipher.init(Cipher.ENCRYPT_MODE, key, new GCMParameterSpec(TAG_LENGTH_BIT, iv));
+        cipher.updateAAD(authenticationData);
+        byte[] encrypted = cipher.doFinal(plainText);
+
+        return CryptoUtils.concatenateIvAndCipherText(iv, encrypted);
     }
 }

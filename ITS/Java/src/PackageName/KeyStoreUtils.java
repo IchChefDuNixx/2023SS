@@ -113,7 +113,7 @@ public class KeyStoreUtils {
      */
     public SecretKey getKey(String keyAlias, char[] keyPassword)
             throws NoSuchAlgorithmException, UnrecoverableEntryException, KeyStoreException {
-        // TODO
+        // TODO: done
         KeyStore.ProtectionParameter protParam = new KeyStore.PasswordProtection(keyPassword);
         KeyStore.SecretKeyEntry skEntry = (KeyStore.SecretKeyEntry) keyStore.getEntry(keyAlias, protParam);
         SecretKey secretKey = skEntry.getSecretKey();

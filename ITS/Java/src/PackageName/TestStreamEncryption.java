@@ -1,9 +1,5 @@
 package PackageName;
 
-import de.fhro.inf.its.uebung3.StreamDecryption;
-import de.fhro.inf.its.uebung3.StreamEncryption;
-import de.fhro.inf.its.uebung3.utils.CryptoUtils;
-import de.fhro.inf.its.uebung3.KeyStoreUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,11 +10,12 @@ import java.util.logging.Logger;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class TestStreamEncryption {
-    private static final String INPUT_FILE = "longTest.txt";
-    private static final String ENCRYPTED_FILE = "encryptedTest.txt";
-    private static final String DECRYPTED_FILE = "decryptedTest.txt";
-    private static final String KEYSTORE_FILE = "keystore.dat";
-    private static final String KEY_ALIAS = "PrivateKey";
+    private static final String DIRECTORY = "C:\\Users\\Felix\\Desktop\\auf-zu-win-11\\th\\2023SS\\ITS\\Java\\src\\PackageName\\";
+    private static final String INPUT_FILE = DIRECTORY + "input.txt";
+    private static final String ENCRYPTED_FILE = DIRECTORY + "encryptedTest.txt";
+    private static final String DECRYPTED_FILE = DIRECTORY + "decryptedTest.txt";
+    private static final String KEYSTORE_FILE = DIRECTORY + "keystore.dat";
+    private static final String KEY_ALIAS = DIRECTORY + "PrivateKey";
 
     // Passwords for Keystore and Key
     // ATTENTION: in real applications DO NOT WRITE PASSWORDS OR SECRETS IN SOURCE
