@@ -1,0 +1,150 @@
+flask_name,reward_1,reward_2,reward_3,reward_4
+Tiny Mythical Flask,2 Embersouls,2 Brinesouls,10 Windsouls
+Small Mythical Flask,5 Embersouls,5 Brinesouls,25 Windsouls
+Medium Mythical Flask,10 Embersouls,10 Brinesouls,50 Windsouls
+Hefty Mythical Flask,15 Embersouls,15 Brinesouls,75 Windsouls
+Regal Teroxis Flask,Noctrus Flintclaw,Foxfire,Razi the Fallen Light,Teroxis_King of Stones
+Metallic Ralgan Flask,Foxfire,Razi the Fallen Light,Lok'thor_the Reborn,Ralgan Ironpaw
+Stout Ralgan Flask,Noctrus Flintclaw,Boldur_Bridge Builder,LOCO-5000,Ralgan Ironpaw
+Vicious Batara Flask,Foxfire,Boldur_Bridge Builder,LOCO-5000,Vindicator Batara
+Stormy Batara Flask,Noctrus Flintclaw,Razi the Fallen Light,Lok'thor_the Reborn,Vindicator Batara
+Cursed Daknak Flask,Foxfire,LOCO-5000,Typhoeus_Storm Father,Daknak Darkblade
+Runic Daknak Flask,Noctrus Flintclaw,Boldur_Bridge Builder,Rhynio Sun Warrior,Daknak Darkblade
+Tidal Proteus Flask,Razi the Fallen Light,Lok'thor_the Reborn,Rhynio Sun Warrior,King Proteus
+Coral Proteus Flask,Noctrus Flintclaw,Boldur_Bridge Builder,Kachina_the Dreamer,King Proteus
+Calm Kensho Flask,Foxfire,LOCO-5000,Kachina_the Dreamer,Kensho_the Aeromaster
+Misty Kensho Flask,Razi the Fallen Light,Lok'thor_the Reborn,Typhoeus_Storm Father,Kensho_the Aeromaster
+Hidden Formos Flask,Razi the Fallen Light,Kachina_the Dreamer,Emerald Amarok,Formos Ebonclaw
+Deadly Formos Flask,Lok'thor_the Reborn,Rhynio Sun Warrior,Cordelia the Twinblade,Formos Ebonclaw
+Haunting Sound Flask,Foxfire,Typhoeus_Storm Father,Columba_Firewing Monk,Sound of Death
+Echoing Sound Flask,Boldur_Bridge Builder,Kachina_the Dreamer,Emerald Amarok,Sound of Death
+Bubbling Plyn Flask,Noctrus Flintclaw,Rhynio Sun Warrior,Cordelia the Twinblade,Plyn Poisontrek
+Restless Plyn Flask,LOCO-5000,Typhoeus_Storm Father,Columba_Firewing Monk,Plyn Poisontrek
+Heartless Bluefire Flask,Noctrus Flintclaw,Cordelia the Twinblade,Vindicator Batara,Bluefire_Void Incarnate
+Blazing Bluefire Flask,Foxfire,Kachina_the Dreamer,Teroxis_King of Stones,Bluefire_Void Incarnate
+Daring Paloma Flask,Razi the Fallen Light,Emerald Amarok,Ralgan Ironpaw,Paloma_Spear Knight
+Soaring Paloma Flask,Lok'thor_the Reborn,Rhynio Sun Warrior,Teroxis_King of Stones,Paloma_Spear Knight
+Grim Widow Flask,Boldur_Bridge Builder,Columba_Firewing Monk,Vindicator Batara,The Coalheart Widow
+Repaired Widow Flask,LOCO-5000,Typhoeus_Storm Father,Ralgan Ironpaw,The Coalheart Widow
+Toxic Quageye Flask,Boldur_Bridge Builder,LOCO-5000,Teroxis_King of Stones,Quageye_the Masher
+Mossy Quageye Flask,Lok'thor_the Reborn,Typhoeus_Storm Father,Ralgan Ironpaw,Quageye_the Masher
+Unbeatable Spikes Flask,Razi the Fallen Light,Rhynio Sun Warrior,Vindicator Batara,Spikes_the Warmonger
+Mercenary Spikes Flask,Foxfire,Kachina_the Dreamer,Daknak Darkblade,Spikes_the Warmonger
+Unbinded Umbu Flask,Noctrus Flintclaw,Columba_Firewing Monk,King Proteus,Umbu_Life Releaser
+Demonic Umbu Flask,Emerald Amarok,Cordelia the Twinblade,Kensho_the Aeromaster,Umbu_Life Releaser
+Corsair Eichiro Flask,Kachina_the Dreamer,Vindicator Batara,Plyn Poisontrek,Pirate Hunter Eichiro
+Captain Eichiro Flask,LOCO-5000,Cordelia the Twinblade,Kensho_the Aeromaster,Pirate Hunter Eichiro
+Judging Cyno Flask,Rhynio Sun Warrior,Ralgan Ironpaw,Sound of Death,Cyno_Arbiter of Souls
+Embalmer Cyno Flask,Boldur_Bridge Builder,Emerald Amarok,King Proteus,Cyno_Arbiter of Souls
+Furtive Mothmo Flask,Typhoeus_Storm Father,Teroxis_King of Stones,Formos Ebonclaw,Mothmo_the Cryptid
+Deceitful Mothmo Flask,Lok'thor_the Reborn,Columba_Firewing Monk,Daknak Darkblade,Mothmo_the Cryptid
+Companion Sparky Flask,Noctrus Flintclaw,Typhoeus_Storm Father,Formos Ebonclaw,Sparky_the Royal Pet
+Protective Sparky Flask,Columba_Firewing Monk,Daknak Darkblade,Bluefire_Void Incarnate,Sparky_the Royal Pet
+Scary Froggit Flask,Foxfire,Rhynio Sun Warrior,Sound of Death,Froggit_the Puppeteer
+Wicked Froggit Flask,Emerald Amarok,King Proteus,Paloma_Spear Knight ,Froggit_the Puppeteer
+Chief Balt Flask,Razi the Fallen Light,Kachina_the Dreamer,Plyn Poisontrek,Balt_Raptor's Captain
+Greedy Balt Flask,Cordelia the Twinblade,Kensho_the Aeromaster,The Coalheart Widow,Balt_Raptor's Captain
+Fighter Maki Flask,LOCO-5000,Teroxis_King of Stones,Spikes_the Warmonger,Maki_the Blossom Fist
+Master Maki Flask,Boldur_Bridge Builder,Vindicator Batara,Umbu_Life Releaser,Maki_the Blossom Fist
+Aether Divinity Flask,Tanit_Divinity's Focus,Volsung Icewind,TZ-530 the Impassable,Dina the Iridescent
+Chaos Cannon Flask,Sigix the Charcannon,Elytragor_Beacon's Call,Apex Land Shark,Kabuto_Samurai Myth
+Wyld Glory Flask,Glory Seeker Arran,Nemea_the Lost Regent,Leafsinger,Formyr the Desecrated
+Vampire Vasile Flask,Lok'thor_the Reborn,Ralgan Ironpaw,The Coalheart Widow,Vasile_the Night Duke
+Bloodlust Vasile Flask,Razi the Fallen Light,Formos Ebonclaw,Paloma_Spear Knight ,Vasile_the Night Duke
+Assassin Leroux Flask,Foxfire,Sound of Death,Bluefire_Void Incarnate,Leroux_the Macabre
+Silent Leroux Flask,Noctrus Flintclaw,Plyn Poisontrek,Quageye_the Masher,Leroux_the Macabre
+Watcher Nuvis Flask,Columba_Firewing Monk,Bluefire_Void Incarnate,Pirate Hunter Eichiro,Nuvis_the Eye Collector
+Gasher Nuvis Flask,Typhoeus_Storm Father,Formos Ebonclaw,Quageye_the Masher,Nuvis_the Eye Collector
+Silencer Kalyt Flask,Emerald Amarok,Paloma_Spear Knight,Cyno_Arbiter of Souls,Kalyt_the Last Word
+Tyranical Kalyt Flask,Rhynio Sun Warrior,Sound of Death,Spikes_the Warmonger,Kalyt_the Last Word
+Royalty Lairel Flask,Cordelia the Twinblade,The Coalheart Widow,Mothmo_the Cryptid,Royal Fighter Lairel
+Brawler Lairel Flask,Kachina_the Dreamer,Plyn Poisontrek,Umbu_Life Releaser,Royal Fighter Lairel
+Harpy Iphelia Flask,Spikes_the Warmonger,Cyno_Arbiter of Souls,Froggit_the Puppeteer,Iphelia_Voice of Pain
+Singer Iphelia Flask,Umbu_Life Releaser,Mothmo_the Cryptid,Balt_Raptor's Captain,Iphelia_Voice of Pain
+Queen Leyla Flask,Quageye_the Masher,Pirate Hunter Eichiro,Sparky_the Royal Pet,Leyla_Queen of Skyhaven
+Angelic Leyla Flask,Umbu_Life Releaser,Mothmo_the Cryptid,Balt_Raptor's Captain,Leyla_Queen of Skyhaven
+Aether Mirror Flask,Mirrormage Ghessela,Medusozoa_the Immortal,Volvel_Golden Pride,Tao_Transcended Lich
+Chaos Djinn Flask,Malik_Hollow Djinn,Styxia_the Headless,Xerkahn_the Rancor,Lyra_Mayhem Conductor
+Wyld Rex Flask,Tropicano Rex,Rago_Crimson Vicar,Puzzlemud's Body,The Triad of Fortunes
+Aether Wind Flask,Windsage Gama,Phorus of the Sunsphere,Ystlin_the Market Boss,Zhu-Lath_the Hermit
+Chaos Elder Flask,The Elder Evil,Bashira_the Half-Blooded,Zyd_the Unhinged,Hedron_the Critical Threat
+Wyld Entomancy Flask,Wrom_the Entomancer,Trafyr_the Rose Warden,Vsov_Blizzard Djinn,Tzopilotl_the Beyonder
+Ambusher Omy Flask,Hidden Omy,Froggit_the Puppeteer,Cyno_Arbiter of Souls,Spikes_the Warmonger
+Killer Omy Flask,Hidden Omy,Sparky_the Royal Pet,Pirate Hunter Eichiro,Quageye_the Masher
+Tarragon Flask,Lok'thor_the Reborn,Teroxis_King of Stones,Sparky_the Royal Pet,Kalyt_the Last Word
+Beetleton Flask,Rhynio Sun Warrior,Formos Ebonclaw,Mothmo_the Cryptid
+Goblin Stronghold Flask,Boldur_Bridge Builder,Daknak Darkblade,Spikes_the Warmonger,Nuvis_the Eye Collector
+Celestial Vault Flask,Noctrus Flintclaw,Columba_Firewing Monk,Balt_Raptor's Captain,Iphelia_Voice of Pain
+Mighty Allfather Flask,Allfather_the Shaper,Vasile_the Night Duke,Froggit_the Puppeteer,Mothmo_the Cryptid
+Titan Allfather Flask,Allfather_the Shaper,Leroux_the Macabre,Maki_the Blossom Fist,Sparky_the Royal Pet
+Binder Viracocha Flask,Viracocha,Balt_Raptor's Captain,Cyno_Arbiter of Souls,Spikes_the Warmonger
+Conflux Viracocha Flask,Viracocha,Pirate Hunter Eichiro,Paloma_Spear Knight,Sound of Death
+Noxious Korg Flask,Korg_the Last Touch,Leroux_the Macabre,Sparky_the Royal Pet,Spikes_the Warmonger
+Vile Korg Flask,Korg_the Last Touch,Mothmo_the Cryptid,Plyn Poisontrek,Teroxis_King of Stones
+Red Valley Flask,Foxfire,Cordelia the Twinblade,Sound of Death,Umbu_Life Releaser
+Pharos Flask,Typhoeus_Storm Father,King Proteus,Pirate Hunter Eichiro,Royal Fighter Lairel
+Aether Flow Flask,Genen_the Icebreaker,Caraca_the Redeemed,Zahira_the Bladedance,Sword Saint Katto
+Chaos Fury Flask,Issa_the Wireslayer,Caelius_the Highlord,Zolb_Labyrinth King,Skylo_Lord of the Wings
+Wyld Root Flask,Tarkar_the Unturned,Tylong_Old Warrior,Kyviat_the Aquamancer,Lechuza_the Skybinder
+Wise Agatha Flask,Agatha_Myth Warden,Kalyt_the Last Word,Vasile_the Night Duke,Balt_Raptor's Captain
+Seer Agatha Flask,Agatha_Myth Warden,Royal Fighter Lairel,Nuvis_the Eye Collector,Maki_the Blossom Fist
+Arsonist Ark Flask,Ark and the Goatapult,Leroux_the Macabre,Paloma_Spear Knight,King Proteus
+Blazing Ark Flask,Ark and the Goatapult,Bluefire_Void Incarnate,Ralgan Ironpaw,Emerald Amarok
+Striker Clockoo Flask,Sgt Clockoo,Royal Fighter Lairel,Cyno_Arbiter of Souls,Kensho_the Aeromaster
+Bomber Clockoo Flask,Sgt Clockoo,Balt_Raptor's Captain,Mothmo_the Cryptid,Daknak Darkblade
+Skyhaven Flask,Razi the Fallen Light,Kachina_the Dreamer,Vindicator Batara,Cyno_Arbiter of Souls
+Fireshard Flask,Ralgan Ironpaw,The Coalheart Widow,Leroux_the Macabre,Sgt Clockoo
+Healed Dawnglow Flask,Plyn Poisontrek,Kachina_the Dreamer,Hidden Omy,Korg_the Last Touch
+Risen Morty Flask,Morty Ahab_Seaturned,Hidden Omy,Kalyt_the Last Word,Leroux_the Macabre
+Returned Morty Flask,Morty Ahab_Seaturned,Sparky_the Royal Pet,Formos Ebonclaw,Kachina_the Dreamer
+Evasive Illu Flask,Illu_Mirage of the Sea,Leyla_Queen of Skyhaven,Iphelia_Voice of Pain,Ralgan Ironpaw
+Submerged Illu Flask,Illu_Mirage of the Sea,Nuvis_the Eye Collector,Cyno_Arbiter of Souls,Umbu_Life Releaser
+Spring Freya Flask,Freya_the Landbinder,Plyn Poisontrek,LOCO-5000,Lok'thor_the Reborn
+Blooming Freya Flask,Freya_the Landbinder,Hidden Omy,The Coalheart Widow,Kensho_the Aeromaster
+World's Center Flask,Nuvis_the Eye Collector,Ark and the Goatapult,Spikes_the Warmonger,Daknak Darkblade
+The Abyss Flask,The Coalheart Widow,Allfather_the Shaper,Emerald Amarok,Sound of Death
+Stormy Seastone Flask,Typhoeus_Storm Father,King Proteus,Pirate Hunter Eichiro,Royal Fighter Lairel
+Aether Exaltation Flask,Satchmo_Pipe Tail,Osyris_Mighty Goddess,Raju_the Unyielding,Chlorox Omega
+Chaos Eruption Flask,Blaze_The Unvoker,Stern_the Gladthorn,Mephisto_the Pactmaker,Domhain_the Fomorian
+Wyld Abundancy Flask,Caccia_the Lunatic,Rima_The Impaler,Klevit_the Speedfall,Saucy_Lady of the Cauldron
+Tarragon Traverse Flask,Sparky_the Royal Pet,Korg_the Last Touch ,Kalyt_the Last Word,Bluefire_Void Incarnate
+Elaria Holy Flask,Vindicator Batara,Cyno_Arbiter of Souls,Leyla_Queen of Skyhaven,Freya_the Landbinder
+Frigore Flask,Noctrus Flintclaw,Balt_Raptor's Captain,Columba_Firewing Monk,Paloma_Spear Knight
+Forgotten Island Flask,Rhynio Sun Warrior,Formos Ebonclaw,Mothmo_the Cryptid,Agatha_Myth Warden
+Mighty Shadomeka Flask,Shadomeka,Foxfire,Teroxis_King of Stones,Leyla_Queen of Skyhaven
+Forceful Shadomeka Flask,Shadomeka,Ark and the Goatapult,Agatha_Myth Warden,Froggit_the Puppeteer
+Noble Cellia Flask,Cellia_Heir of War,Viracocha,Quageye_the Masher,Spikes_the Warmonger
+Illustrious Cellia Flask,Cellia_Heir of War,Kalyt_the Last Word,Vasile_the Night Duke,Daknak Darkblade
+Prominent Reks Flask,Reks_the Dragonslayer,Formos Ebonclaw,The Coalheart Widow,Mothmo_the Cryptid
+Superior Reks Flask,Reks_the Dragonslayer,Lok'thor_the Reborn,Balt_Raptor's Captain,Cyno_Arbiter of Souls
+Chilling Frostfire Flask,Frostfire_the Corrupted,Allfather_the Shaper,Agatha_Myth Warden,King Proteus
+Conflicted Frostfire Flask,Frostfire_the Corrupted,Korg_the Last Touch,Pirate Hunter Eichiro,Ralgan Ironpaw
+Deep Moklam Flask,Moklam_the Sea Colossus,Leroux_the Macabre,Plyn Poisontrek,Bluefire_Void Incarnate
+Colossal Moklam Flask,Moklam_the Sea Colossus,Kensho_the Aeromaster,Vindicator Batara,Emerald Amarok
+Roaring Predonyx Flask,Predonyx_Jungle King,Umbu_Life Releaser,Maki_the Blossom Fist,Hidden Omy
+Wilderness Predonyx Flask,Predonyx_Jungle King,Columba_Firewing Monk,Cellia_Heir of War,Kachina_the Dreamer
+Duskwillow Rebuilt Flask,Foxfire,Umbu_Life Releaser,Vasile_the Night Duke,Cordelia the Twinblade
+Fury Alyel Flask,Alyel_Rush of Fury,Typhoeus_Storm Father,Iphelia_Voice of Pain,Kensho_the Aeromaster
+Righteous Alyel Flask,Alyel_Rush of Fury,Razi the Fallen Light,Sparky_the Royal Pet,Leroux_the Macabre
+Sneaky Ashanti Flask,Ashanti_the Assassin,Rhynio Sun Warrior,Viracocha,Ark and the Goatapult
+Striking Ashanti Flask,Ashanti_the Assassin,Sound of Death,Hidden Omy,Illu_Mirage of the Sea
+Enchanted Yaritza Flask,Yaritza,Boldur_Bridge Builder,Freya_the Landbinder,Korg_the Last Touch
+Protective Yaritza Flask,Yaritza,Cordelia the Twinblade,Umbu_Life Releaser,Allfather_the Shaper
+Skyhaven Assault Flask,Kachina_the Dreamer,Plyn Poisontrek,Froggit_the Puppeteer,Hidden Omy
+Void Plane Flask,Kensho_the Aeromaster,Foxfire,Sound of Death,Allfather_the Shaper
+Salt Wastes Flask,Leroux_the Macabre,Ralgan Ironpaw,LOCO-5000,The Coalheart Widow
+Duskwillow Flask,Illu_Mirage of the Sea,Pirate Hunter Eichiro,King Proteus,Morty Ahab_Seaturned
+Undying Veric Flask,Veric_the Undying,Typhoeus_Storm Father,Sgt Clockoo,Kalyt_the Last Word
+Vicious Veric Flask,Veric_the Undying,Kensho_the Aeromaster,Nuvis_the Eye Collector,Shadomeka
+Corrupting Caesar Flask,Caesar_the Commander,Lok'thor_the Reborn,Korg_the Last Touch,Kachina_the Dreamer
+Crazy Caesar Flask,Caesar_the Commander,Mothmo_the Cryptid,Sparky_the Royal Pet,Iphelia_Voice of Pain
+Vindictive Viir Flask,Viir_the Subjugator,Royal Fighter Lairel,Leyla_Queen of Skyhaven,Frostfire_the Corrupted
+Vengeful Viir Flask,Viir_the Subjugator,Rhynio Sun Warrior,Plyn Poisontrek,Freya_the Landbinder
+Golden Flask,Boldur_Bridge Builder,Daknak Darkblade,Spikes_the Warmonger,Ark and the Goatapult
+Void Invasion Flask,Kachina_the Dreamer,Cyno_Arbiter of Souls,Razi the Fallen Light,Freya_the Landbinder
+Creepy Darkassan Flask,Darkassan_the Creeper,Ark and the Goatapult,Moklam_the Sea Colossus,Vindicator Batara
+Freezing Darkassan Flask,Darkassan_the Creeper,Sound of Death,Kachina_the Dreamer,Illu_Mirage of the Sea
+Jinxed Lerna Flask,Lerna_the Mutated,Froggit_the Puppeteer,Agatha_Myth Warden,Mothmo_the Cryptid
+Perpetuous Lerna Flask,Lerna_the Mutated,Formos Ebonclaw,Frostfire_the Corrupted,Lok'thor_the Reborn
+Breathing Krampus Flask,Krampus_the Impostor,Foxfire,Typhoeus_Storm Father,Kensho_the Aeromaster
+Warding Krampus Flask,Krampus_the Impostor,Spikes_the Warmonger,Paloma_Spear Knight,Rhynio Sun Warrior
