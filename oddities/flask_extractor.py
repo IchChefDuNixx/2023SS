@@ -11,6 +11,7 @@
 # 8. determine which champions can be leveled up #and by using which flasks (done before)
 # 9. make exceptions for lev (very optional)
 # 10. turn this into a standalone .py and make it automated with pulling the data when loading kong
+# Note: level 10 champs are not being shown in the final table, fix with lev update
 
 # In[122]:
 # imports
@@ -202,7 +203,7 @@ def main():
         if owned >= cost:
             return "yes! no flasks necessary!"
         elif owned + potential >= cost:
-            return "yes, only with flasks."
+            return "yes, only with flasks"
         else:
             return f"no, missing {int(cost-potential-owned)}"
     full_frame["is_sufficient"] = full_frame.apply(lambda x: is_sufficient(x["number"], x["flask_shards"], x["upgrade_cost"]), axis=1)
@@ -234,7 +235,7 @@ def main():
         for row in col:
             if not pd.isna(row):
                 if row not in replace_dict:
-                    replace_dict[row] = (user_items_flasks.loc[row][1], user_items_flasks.loc[row][0])
+                    replace_dict[row] = (user_items_flasks.loc[row, "flask_name"], user_items_flasks.loc[row, "number"]) # shardbot exception perma fix here
 
     def replace_flask_id(flask_id):
         if not pd.isna(flask_id):
