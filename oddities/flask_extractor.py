@@ -12,6 +12,7 @@
 # 9. make exceptions for lev (very optional)
 # 10. turn this into a standalone .py and make it automated with pulling the data when loading kong
 # Note: level 10 champs are not being shown in the final table, fix with lev update
+# TODO: make 2 .exe: one for credential input and data update, another for reviewing the last result without updating
 
 # In[122]:
 # imports
