@@ -10,13 +10,16 @@ def animate():
 
 def spin():
     
-    spinner = itertools.cycle(['-', '\\', '|', '/'])
+    spinner = ['---', '\\\\', '||', '/']
     
-    while True:
-        sys.stdout.write(next(spinner))
+    for i in range(len(spinner)):
+        sys.stdout.write(spinner[i])
         sys.stdout.flush()
-        time.sleep(0.001)
-        sys.stdout.write('\b')
+        time.sleep(1)
+        if i > 0:
+            for _ in range(len(spinner[i])):
+                sys.stdout.write('\b')
+        i += 1
 
 if __name__ == '__main__':
     animate()
