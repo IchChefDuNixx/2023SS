@@ -28,5 +28,5 @@ in my case, 10 digits and 30 characters respectively
 And NOT this:
 {'user_id': 'IchChefDuNixx', 'password': ' abc'}
 
-If everything worked so far, just follow the command line prompts to see the results.
-Don't forget to scroll down and/or right to see the full table if necessary!
+If everything worked so far, just follow the console prompts to see the results.
+Don't forget to scroll up/down or right to see the full table if necessary!
