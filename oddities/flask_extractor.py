@@ -60,8 +60,12 @@ def main():
         cards_shard_dict = {}
         for unit in root.findall("unit"):
             cards_shard_dict[int(unit.find("id").text)] = unit.find("name").text
-
-
+    except Exception as e:
+        print("Error while processing local files occured!")
+        input("Press ENTER to try fetching new data... (Else restart the flask_extractor.exe, check your files manually, check README.txt, then message IchChefDuNixx)")
+        return
+        
+    try:
         # constants for id boundaries (04.04.23), easier to change here than in-line 
         flasks_id_min = 2534
         flasks_id_max = 2679
@@ -93,7 +97,7 @@ def main():
             flasks_id_max = flasks_id_max_temp
         else:
             print("Error in #1: this action could possibly exclude flasks. Message IchChefDuNixx")
-            input("Press ENTER to confirm the error and exit")
+            input("Press ENTER to confirm the error and exit...")
             return
             
         # create new dataframe with flask id and respective reward ids 
@@ -263,7 +267,13 @@ def main():
         print(final)
         input('Press Enter to exit...')
     except Exception as e:
-        input(e)
+        print("Exception while processing data occured!\nCannot continue!\nCheck README.txt, then message IchChefDuNixx")
+        print(e)
+        print(e.args)
+        print(e.with_traceback(e.__traceback__))
+        input("Press ENTER to confirm this error and exit...")
+        return
+    
 # %%
 def not_main():
 
@@ -307,8 +317,8 @@ def not_main():
     if readchar.readkey() not in (readchar.key.ENTER, readchar.key.ENTER_2):
         # continue with old data
         main()
-    else:
-        print("Request in progress...")
+    # return here if main() had an error
+    print("Request in progress...")
 
     try:
         response = requests.get(f"https://spellstone.synapse-games.com/api.php?message=init&user_id={credentials['user_id']}&password={credentials['password']}")
