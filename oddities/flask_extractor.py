@@ -296,8 +296,9 @@ def not_main():
         
     
     # init request process
-    key = input("\nPress ENTER to make the update request... (or other buttons to cancel)")
+    key = input("\nPress ENTER to update data... (or other buttons + Enter to use old data)")
     if key != "":
+        print("")#TODO: it's already calculating the result without updating!
         return
     else:
         print("Request in progress...")
@@ -322,6 +323,7 @@ def not_main():
     
 # %%
 if __name__ == "__main__":
+    # try catch on main() 
     not_main()
     main()
 

@@ -9,7 +9,6 @@ def simple_function(x,y,z):
     q = x+y
     f = q*z
     print("f(x) =", f)
-# simple_function(*input)
 
 def simple_backpropagation(x,y,z):
     # c
@@ -27,14 +26,13 @@ def simple_backpropagation(x,y,z):
     print("df/dx: z =", z)
     print("df/dy: z =", z)
     print("df/dz: x+y =", x+y)
-# simple_backpropagation(*input)
+
 
 def slightly_more_complex_function(w,x,y,z):
     q = w+x
     r = y+z
     f = q*r
-    print("f(x) =", f)
-slightly_more_complex_function(*input2)
+    print("f(x) = q*r =", f)
 
 def slightly_more_complex_backpropagation(w,x,y,z):
     # c
@@ -50,4 +48,9 @@ def slightly_more_complex_backpropagation(w,x,y,z):
     print("df/dx: y+z =", y+z)
     print("df/dy: w+x =", w+x)
     print("df/dz: w+x =", w+x)
+
+# simple_function(*input)
+# simple_backpropagation(*input)
+slightly_more_complex_function(*input2)
 slightly_more_complex_backpropagation(*input2)
+

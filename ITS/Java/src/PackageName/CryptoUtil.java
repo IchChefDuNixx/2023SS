@@ -1,4 +1,4 @@
-package PackageName;
+package de.fhro.inf.its.uebung04;
 
 import java.io.FileInputStream;
 import java.io.IOException;
