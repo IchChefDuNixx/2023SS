@@ -35,7 +35,7 @@ public class TestKeyStoreUtils {
      */
     private void createAndWriteKeystore() {
         try {
-            var keyStore = new KeyStoreUtils(KEYSTORE_PASSWORD);
+            KeyStoreUtils keyStore = new KeyStoreUtils(KEYSTORE_PASSWORD);
             keyStore.writeKeyStoreToFile(KEYSTORE_FILE, KEYSTORE_PASSWORD);
         } catch (Exception e) {
             logger.severe("Error when creating KeyStore");
@@ -50,7 +50,7 @@ public class TestKeyStoreUtils {
      */
     private void addKeyToKeystore() {
         try {
-            var keyStore = new KeyStoreUtils(KEYSTORE_FILE, KEYSTORE_PASSWORD);
+            KeyStoreUtils keyStore = new KeyStoreUtils(KEYSTORE_FILE, KEYSTORE_PASSWORD);
             SecretKey key = CryptoUtils.generateAESKey();
             keyStore.addKey(key, KEY_ALIAS, KEY_PASSWORD);
             keyStore.writeKeyStoreToFile(KEYSTORE_FILE, KEYSTORE_PASSWORD);
@@ -66,7 +66,7 @@ public class TestKeyStoreUtils {
      */
     private void readKeystoreAndGetKey() {
         try {
-            var keyStore = new KeyStoreUtils(KEYSTORE_FILE, KEYSTORE_PASSWORD);
+            KeyStoreUtils keyStore = new KeyStoreUtils(KEYSTORE_FILE, KEYSTORE_PASSWORD);
             SecretKey key = keyStore.getKey(KEY_ALIAS, KEY_PASSWORD);
             Assertions.assertEquals(key.getAlgorithm(), "AES");
         } catch (Exception e) {

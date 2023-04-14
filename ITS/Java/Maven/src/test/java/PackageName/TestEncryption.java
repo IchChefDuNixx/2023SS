@@ -11,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class TestEncryption {
-    private static final String INPUT_FILENAME = "C:\\Users\\Felix\\Desktop\\auf-zu-win-11\\th\\2023SS\\ITS\\Java\\src\\PackageName\\input.txt";
-    private static final String ENC_FILENAME = "C:\\Users\\Felix\\Desktop\\auf-zu-win-11\\th\\2023SS\\ITS\\Java\\src\\PackageName\\cipher.txt";
-    private static final String KEY_FILENAME = "C:\\Users\\Felix\\Desktop\\auf-zu-win-11\\th\\2023SS\\ITS\\Java\\src\\PackageName\\key.txt";
+    private static final String INPUT_FILENAME = "input.txt";
+    private static final String ENC_FILENAME = "cipher.txt";
+    private static final String KEY_FILENAME = "key.txt";
     private static final Logger logger = Logger.getLogger(TestEncryption.class.getName());
 
     // This is not a good test setup, but it is simple and easy to understand.

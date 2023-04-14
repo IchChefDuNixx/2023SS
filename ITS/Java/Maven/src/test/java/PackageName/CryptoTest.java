@@ -6,12 +6,11 @@ import org.junit.jupiter.api.Test;
 
 import java.security.NoSuchAlgorithmException;
 import javax.crypto.*;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 class CryptoTest {
-
-    private static final String TEST_DIRECTORY = "C:\\Users\\Felix\\Desktop\\auf-zu-win-11\\th\\2023SS\\ITS\\Java\\src\\PackageName\\";
 
     @Test
     void testGenerateKey() throws NoSuchAlgorithmException {
@@ -28,13 +27,13 @@ class CryptoTest {
         SecretKey key = Encryption.generateKey();
 
         // Encrypt some data
-        byte[] plaintext = Files.readAllBytes(Paths.get(TEST_DIRECTORY + "input.txt"));
+        byte[] plaintext = Files.readAllBytes(Paths.get("input.txt"));
         byte[] ciphertext = Encryption.encrypt(key, plaintext);
         assertNotEquals(plaintext, ciphertext);
-        FileUtils.writeToFileBase64(TEST_DIRECTORY + "testCipher.txt", ciphertext);
+        FileUtils.writeToFileBase64("testCipher.txt", ciphertext);
 
         // Decrypt the data
-        byte[] ciphertext_hopefully = FileUtils.readFromFileBase64(TEST_DIRECTORY + "testCipher.txt");
+        byte[] ciphertext_hopefully = FileUtils.readFromFileBase64("testCipher.txt");
         byte[] plaintext_hopefully = Decryption.decrypt(key, ciphertext_hopefully);
         assertEquals(new String(plaintext), new String(plaintext_hopefully));
 

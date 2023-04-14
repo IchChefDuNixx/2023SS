@@ -9,11 +9,10 @@ import java.util.logging.Logger;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class TestAesGcmEncryption {
-    private static final String DIRECTORY = "C:\\Users\\Felix\\Desktop\\auf-zu-win-11\\th\\2023SS\\ITS\\Java\\src\\PackageName\\";
-    private static final String FILENAME = DIRECTORY + "input.txt";
-    private static final String ENCRYPTED_FILE = DIRECTORY + "encryptedTest.bin";
-    private static final String KEYSTORE_FILE = DIRECTORY + "keystore.dat";
-    private static final String KEY_ALIAS = DIRECTORY + "PrivateKey";
+    private static final String FILENAME = "input.txt";
+    private static final String ENCRYPTED_FILE = "encryptedTest.bin";
+    private static final String KEYSTORE_FILE = "keystore.dat";
+    private static final String KEY_ALIAS = "PrivateKey";
 
     // Passwords for Keystore and Key
     // ATTENTION: in real applications DO NOT WRITE PASSWORDS OR SECRETS IN SOURCE
@@ -34,7 +33,7 @@ public class TestAesGcmEncryption {
 
     private void createAndFillKeystore() {
         try {
-            var keyStore = new KeyStoreUtils(KEYSTORE_PASSWORD);
+            KeyStoreUtils keyStore = new KeyStoreUtils(KEYSTORE_PASSWORD);
 
             SecretKey key = CryptoUtils.generateAESKey();
             keyStore.addKey(key, KEY_ALIAS, KEY_PASSWORD);
@@ -50,7 +49,7 @@ public class TestAesGcmEncryption {
 
     private void encryption() {
         try {
-            var keyStore = new KeyStoreUtils(KEYSTORE_FILE, KEYSTORE_PASSWORD);
+            KeyStoreUtils keyStore = new KeyStoreUtils(KEYSTORE_FILE, KEYSTORE_PASSWORD);
 
             SecretKey key = keyStore.getKey(KEY_ALIAS, KEY_PASSWORD);
 
@@ -74,7 +73,7 @@ public class TestAesGcmEncryption {
 
     private void decryption() {
         try {
-            var keyStore = new KeyStoreUtils(KEYSTORE_FILE, KEYSTORE_PASSWORD);
+            KeyStoreUtils keyStore = new KeyStoreUtils(KEYSTORE_FILE, KEYSTORE_PASSWORD);
 
             SecretKey key = keyStore.getKey(KEY_ALIAS, KEY_PASSWORD);
 

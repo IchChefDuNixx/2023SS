@@ -14,11 +14,11 @@ public class TestDigitalSignature {
 
     private static final String PRIVATE_KEY_FILE = "private.pkcs8";
     private static final String CERTIFICATE_FILE = "certificate.pem";
-    private static final String FILE_TO_SIGN = "testFile.txt";
+    private static final String FILE_TO_SIGN = "input.txt";
     // append .signature to the filename of the file we want to create a signature
     // for
     private static final String SIGNATURE_FILE = FILE_TO_SIGN + ".signature";
-    private static final String PKCS7FILE = "PKCS7file.txt";
+    // private static final String PKCS7FILE = "PKCS7file.txt";
 
     @Test
     public void testSignature() throws Exception {
@@ -45,7 +45,7 @@ public class TestDigitalSignature {
         }
 
         Assertions.assertTrue(result);
-        logger.info("Signature.verify()successful");
+        logger.info("Signature.verify() successful");
 
         // store the signature in PKCS#7 format
         // PKCS7Signature.createPKCS7(PKCS7FILE,certificate,signedData);
