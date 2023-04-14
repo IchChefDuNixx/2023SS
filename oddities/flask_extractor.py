@@ -265,7 +265,7 @@ def main(gui:bool=False):
         # use .xml to replace unit_id by champ name
         final.replace(cards_shard_dict, inplace=True)
         if not gui:
-            #print(final)
+            print(final)
             input('Press Enter to exit...')
         else:
             return final # only if everything before worked correctly, without exceptions
