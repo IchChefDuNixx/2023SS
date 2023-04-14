@@ -33,7 +33,7 @@ from lxml import etree
 # custom libraries, if applicable
 
 # %%
-def main():
+def main(gui:bool=False):
     try:
         # console setup
         os.system(f"mode con cols={200} lines={1000}") 
@@ -264,8 +264,11 @@ def main():
 
         # use .xml to replace unit_id by champ name
         final.replace(cards_shard_dict, inplace=True)
-        print(final)
-        input('Press Enter to exit...')
+        if not gui:
+            #print(final)
+            input('Press Enter to exit...')
+        else:
+            return final # only if everything before worked correctly, without exceptions
     except Exception as e:
         print("Exception while processing data occured!\nCannot continue!\nCheck README.txt, then message IchChefDuNixx")
         print(e)
@@ -275,13 +278,13 @@ def main():
         return
     
 # %%
-def not_main():
+def not_main(gui:bool=False):
 
     # try to read credentials.json or create new file with default values
     default_credentials = {
         "user_id": "default",
         "password": "default"
-        #"kong_token": "default_token" # placeholder for now
+        # "kong_token": "default_token" # placeholder for now
     }
     
     try:
@@ -316,7 +319,7 @@ def not_main():
     print("\nPress ENTER to update data... (or any other button to immediately process the last snapshot)")
     if readchar.readkey() not in (readchar.key.ENTER, readchar.key.ENTER_2):
         # continue with old data
-        main()
+        return main(gui)
     # return here if main() had an error
     print("Request in progress...")
 
@@ -342,7 +345,7 @@ def not_main():
         print("\nError in the data request process!\nCannot continue!\nCheck/delete credentials.json and README.txt, then message IchChefDuNixx\n")
         input("Press ENTER to confirm the error and exit...")
     else:
-        main()
+        return main(gui)
 
 # %%
 if __name__ == "__main__":
