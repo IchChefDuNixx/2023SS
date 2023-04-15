@@ -23,7 +23,7 @@ import os
 import re
 import warnings
 
-# external libraries
+# # external libraries
 import pandas as pd
 import readchar
 import requests
@@ -61,7 +61,7 @@ def main(gui:bool=False):
         for unit in root.findall("unit"):
             cards_shard_dict[int(unit.find("id").text)] = unit.find("name").text
     except Exception as e:
-        print("Error while processing local files occured!")
+        print("\nError while processing local files occured!")
         input("Press ENTER to try fetching new data... (Else restart the flask_extractor.exe, check your files manually, check README.txt, then message IchChefDuNixx)")
         return
         
