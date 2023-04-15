@@ -15,15 +15,14 @@
 # make 2 .exe: one for credential input and data update, another for reviewing the last result without updating, DONE: too easy
 
 # %%
-# imports
-
+# imports (old, not optimized)
 # built-in modules
 import json
 import os
 import re
 import warnings
 
-# # external libraries
+# external libraries
 import pandas as pd
 import readchar
 import requests
@@ -31,6 +30,18 @@ import requests
 from lxml import etree
 
 # custom libraries, if applicable
+
+# imports (new, minimal)
+# from json import load, loads, dump
+# from os import system
+# from re import match
+# from warnings import filterwarnings
+
+# from pandas import
+# from readchar import 
+# from requests import
+
+# from lxml import
 
 # %%
 def main(gui:bool=False):

@@ -6,11 +6,5 @@ setup(
     author='IchChefDuNixx',
     entry_points={
         'console_scripts': ['flask_extractor = flask_extractor.__main__:not_main']
-    },
-    install_requires=[
-        'pandas',
-        'readchar',
-        'requests',
-        'lxml'
-    ]
+    }
 )

@@ -15,42 +15,53 @@
 # make 2 .exe: one for credential input and data update, another for reviewing the last result without updating, DONE: too easy
 
 # %%
-# imports
-
+# imports (old, not optimized)
 # built-in modules
-import json
-import os
-import re
-import warnings
+# import json
+# import os
+# import re
+# import warnings
 
-# # external libraries
-import pandas as pd
-import readchar
-import requests
+# external libraries
+# import pandas as pd
+# import readchar
+# import requests
 
-from lxml import etree
+# from lxml import etree
 
 # custom libraries, if applicable
+
+# imports (new, minimal)
+from json import load, loads, dump
+from os import system
+from re import match
+from warnings import filterwarnings
+
+from pandas import DataFrame, read_json, set_option, concat, isna
+from readchar import key, readkey
+from requests import get
+
+from lxml import etree
 
 # %%
 def main(gui:bool=False):
     try:
         # console setup
-        os.system(f"mode con cols={200} lines={1000}") 
-        warnings.filterwarnings("ignore", category=FutureWarning)
+        system(f"mode con cols={200} lines={1000}") 
+        filterwarnings("ignore", category=FutureWarning)
 
-        pd.set_option("display.max_columns", None)
-        pd.set_option("display.width", 1000)
-        pd.set_option("display.max_rows", None)
+        set_option("display.max_columns", None)
+        set_option("display.width", 1000)
+        set_option("display.max_rows", None)
         
         # parse data into data structures
-        user_items_raw = pd.read_json("user_items.json", orient="index")
+        user_items_raw = read_json("user_items.json", orient="index")
         # print(user_items_raw.head())
 
-        item_data_raw = pd.read_json("item_data.json", orient="index")
+        item_data_raw = read_json("item_data.json", orient="index")
         # print(item_data_raw.head())
 
-        user_units_raw = pd.read_json("user_units.json", orient="index")
+        user_units_raw = read_json("user_units.json", orient="index")
         # print(user_units_raw.head())
 
         # use etree for cards_shard.xml
@@ -110,7 +121,7 @@ def main(gui:bool=False):
                 reward_ids.append(choice['item'][0]['id'])
             rows.append([obj_id, obj_name] + reward_ids)
 
-        item_data_flask_rewards = pd.DataFrame(rows, columns=['id', "flask_name", 'reward1', 'reward2', 'reward3', 'reward4'])
+        item_data_flask_rewards = DataFrame(rows, columns=['id', "flask_name", 'reward1', 'reward2', 'reward3', 'reward4'])
         # item_data_flask_rewards.head()
 
 
@@ -141,7 +152,7 @@ def main(gui:bool=False):
                                                                     #    107607	    2596	    NaN	        NaN
                                                                     #    104004	    2603	    2648.0	    NaN
                                                                     #    104008	    2604	    2658.0	    2671.0
-        item_data_shard_source = pd.DataFrame.from_dict(source_dict, orient="index", columns=[f"source_{i}" for i in range(1,max([len(val) for val in source_dict.values()])+1)])
+        item_data_shard_source = DataFrame.from_dict(source_dict, orient="index", columns=[f"source_{i}" for i in range(1,max([len(val) for val in source_dict.values()])+1)])
 
         # merge previous list with shard sums with shard source (EXLUDING YET UNBUILT CHAMPIONS)
         item_data_shards = user_items_flasks_grouped.merge(item_data_shard_source, left_on="reward", right_index=True)
@@ -158,7 +169,7 @@ def main(gui:bool=False):
             user_items_champion_shards.append(user_items_raw[user_items_raw["id"].between(id_min, id_max)])
 
         # concat dataframes into one
-        user_items_champion_shards = pd.concat(user_items_champion_shards)
+        user_items_champion_shards = concat(user_items_champion_shards)
         # user_items_champion_shards.head()
 
 
@@ -170,7 +181,7 @@ def main(gui:bool=False):
             user_units_champions_owned.append(user_units_raw[user_units_raw["unit_id"].between(id_min, id_max)])
             
         # concat dataframes into one
-        user_units_champions_owned = pd.concat(user_units_champions_owned)
+        user_units_champions_owned = concat(user_units_champions_owned)
             
         # keep only the specified columns and drop all others
         user_units_champions_owned = user_units_champions_owned.drop(user_units_champions_owned.columns.difference(["unit_id", "level"]), axis=1)
@@ -193,7 +204,7 @@ def main(gui:bool=False):
 
         # replace NaN where possible
         for col in full_frame:
-            if not re.match("source",col): # type: ignore
+            if not match("source",col): # type: ignore
                 full_frame[col] = full_frame[col].fillna(0).astype(int)
 
         # total shards available
@@ -236,12 +247,12 @@ def main(gui:bool=False):
         replace_dict = {}
         for col in arr:
             for row in col:
-                if not pd.isna(row):
+                if not isna(row):
                     if row not in replace_dict:
                         replace_dict[row] = (user_items_flasks.loc[row, "flask_name"], user_items_flasks.loc[row, "number"]) # shardbot exception perma fix here
 
         def replace_flask_id(flask_id):
-            if not pd.isna(flask_id):
+            if not isna(flask_id):
                 return replace_dict[flask_id][0], replace_dict[flask_id][1]
 
         for i, col in enumerate(source_cols):
@@ -289,10 +300,10 @@ def not_main(gui:bool=False):
     
     try:
         with open("credentials.json", "r") as f:
-            credentials = json.load(f)
+            credentials = load(f)
     except FileNotFoundError:
         with open("credentials.json", "w") as f:
-            json.dump(default_credentials, f)
+            dump(default_credentials, f)
         credentials = default_credentials
         
     # ask for new values if they're still default
@@ -300,7 +311,7 @@ def not_main(gui:bool=False):
         credentials["user_id"] = input("Please enter your USER_ID and press Enter:\n")
         credentials["password"] = input("\nPlese enter your PASSWORD* and press Enter:\n")
         with open("credentials.json", "w") as f:
-            json.dump(credentials, f)
+            dump(credentials, f)
         print(f"\nUpdated credentials:\n{credentials}")
     else:
         print(f"Current credentials:\n{credentials}")
@@ -317,25 +328,25 @@ def not_main(gui:bool=False):
     
     # improved version using the readchar module
     print("\nPress ENTER to update data... (or any other button to immediately process the last snapshot)")
-    if readchar.readkey() not in (readchar.key.ENTER, readchar.key.ENTER_2):
+    if readkey() not in (key.ENTER, key.ENTER_2):
         # continue with old data
         return main(gui)
     # return here if main() had an error
     print("Request in progress...")
 
     try:
-        response = requests.get(f"https://spellstone.synapse-games.com/api.php?message=init&user_id={credentials['user_id']}&password={credentials['password']}")
+        response = get(f"https://spellstone.synapse-games.com/api.php?message=init&user_id={credentials['user_id']}&password={credentials['password']}")
         
-        response_content = json.loads(response.content.decode("utf-8"))
+        response_content = loads(response.content.decode("utf-8"))
         
         points_of_interest = ["item_data", "user_items", "user_units"]
         for poi in points_of_interest:
             data = response_content[poi]
             with open(f"{poi}.json","w") as f:
-                json.dump(data, f)
+                dump(data, f)
         
         # champ xml update    
-        response = requests.get("https://spellstone.synapse-games.com/assets/cards_shard.xml")
+        response = get("https://spellstone.synapse-games.com/assets/cards_shard.xml")
         
         with open("cards_shard.xml", "wb") as file:
             file.write(response.content)
