@@ -8,7 +8,7 @@ base = 'console'
 
 executables = [
     Executable('flask_extractor.py', base=base),
-    Executable('flask_guy.py')
+    Executable('flask_gui.py')
 ]
 
 setup(name='Flask Extractor',
