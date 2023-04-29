@@ -1,0 +1,31 @@
+{
+    "manifest_version": 3,
+    "name": "ClairStone",
+    "version": "0.9",
+    "description": "If you know, you know",
+    "author": "IchChefDuNixx",
+    "permissions":[
+        "webRequest",
+        "webRequestBlocking",
+        "webRequestFilterResponse",
+        "nativeMessaging",
+        "tabs"
+    ],
+    "host_permissions": [
+        "*://*.synapse-games.com/*",
+        "*://game248326.konggames.com/*"
+    ],
+    "background": {
+        "scripts": ["background.js"]
+    },
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "clair@stone.net"
+        }
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "Cheater!",
+        "default_icon": "icon.jpg"
+    }
+}
