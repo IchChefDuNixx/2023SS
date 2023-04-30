@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "ClairStone",
-    "version": "0.9",
+    "version": "1.0",
     "description": "If you know, you know",
     "author": "IchChefDuNixx",
     "permissions":[
@@ -24,7 +24,6 @@
         }
     },
     "action": {
-        "default_popup": "popup.html",
         "default_title": "Cheater!",
         "default_icon": "icon.jpg"
     }
