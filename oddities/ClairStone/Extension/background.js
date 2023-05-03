@@ -7,6 +7,7 @@ let port = browser.runtime.connectNative("clairstone");
 
 // On a click on the browser action, send the app a message.
 browser.action.onClicked.addListener(() => {
+  // TODO: make the button useful
   browser.windows.create({
     type: "detached_panel",
     url: "about:devtools-toolbox?type=extension"
