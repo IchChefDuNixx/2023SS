@@ -62,7 +62,17 @@ def show_opponent_deck(df, current_host):
     # print fancy table in console
     df = df.reindex(["unit", "level", "rune", "cost"], axis=1)
     table = tabulate(df, headers="keys", tablefmt="orgtbl") # type: ignore
-    return "opponent deck\n" + table
+    
+    # calc stats about deck
+    num_champs = df["level"][df["level"] != ""].count()
+    most_used_rune = df["rune"].value_counts()
+    most_used_rune_count = str(most_used_rune.index[0]) + " (" + str(most_used_rune.iloc[0]) + ")"
+    cost_distribution = df["cost"].value_counts().to_dict()
+    cost_distribution = [cost_distribution.get(i, 0) for i in range(5)]
+    cost_distribution_str = " | ".join(str(v) for v in cost_distribution)
+    deck_overview = f"Champs: {num_champs}\nmost used rune: {most_used_rune_count}\ncost distribution: {cost_distribution_str}"
+
+    return "opponent deck\n" + table + "\n" + deck_overview
 
 def get_starting_cards(on_hand, cards_all, card_map):        
     on_hand_str = "|| "
@@ -79,7 +89,6 @@ def get_new_card(df:pd.DataFrame, on_hand):
     
 def main(responseData:dict):
     try:
-        # TODO: TEST item_data.json when loading kong
         # load
         with open("cards_data/cards_all.json", "r", encoding="utf-8") as f:
             cards_all = json.load(f)
@@ -87,16 +96,18 @@ def main(responseData:dict):
         with open("cards_data/item_data.json", "r", encoding="utf-8") as f:
             item_data = json.load(f)
         
-        url = responseData["url"]
         message = responseData["data"]
+        # ping pong test
+        if message == "ping":
+            return "pong"
+        
+        url = responseData["url"]
         
         # remove domain, path and query from url
         file_name = url[url.rindex("/")+1:url.index("?")]
         
         # prevent crash/ not loading issues
-        # TODO: automatically get item_data.json
         if message[0] == "<":
-            
             # saving file
             with open(f"cards_data/{file_name}", "w", encoding="utf-8") as f:
                 f.write(message)
@@ -114,16 +125,10 @@ def main(responseData:dict):
             message_old = json.loads(message)
             if "item_data" in message_old.keys():
                 with open("cards_data/item_data.json", "w", encoding="utf-8") as f:
-                    json.dump(message_old["item_data"], f) # TODO: WIP line
+                    json.dump(message_old["item_data"], f)
                 # should be logged 1x
                 return "updating local files..."
 
-        elif message == "ping":
-            return "pong"
-    except Exception as e:
-        return traceback.format_exc()
-        
-    try:
         msg_dict = json.loads(message)
         request_type = msg_dict["request"]["message"]
         # in arena, host is always the attacker
@@ -132,22 +137,16 @@ def main(responseData:dict):
         else:
             current_host = "0"
         
-    except Exception as e:
-        return "Error while parsing the message into a dictionary\n" + str(e.args) + str(type(message)) + "\n\n" + message
-    
-    if "battle_data" in msg_dict.keys():
-        card_map = msg_dict["battle_data"]["card_map"]
-        turn = msg_dict["battle_data"]["turn"]
-    else:
-        # TODO: TAKE CARE OF THIS LATER
-        # return message.replace("\\", "")
-        return "DONTLOG"
+        if "battle_data" in msg_dict.keys():
+            card_map = msg_dict["battle_data"]["card_map"]
+            turn = msg_dict["battle_data"]["turn"]
+        else:
+            return "DONTLOG"
 
+        # BUG: log stops posting after opponent goes autoplay? probably fixed
+        # NOTE: only working for placement? and arena
+        # hand cards
 
-    # BUG: log stops posting after opponent goes autoplay? probably fixed
-    # NOTE: only working for clash? and arena
-    # hand cards
-    try:
         on_hand = []
         on_hand_auto = []
     
@@ -190,7 +189,6 @@ def main(responseData:dict):
                 else:
                     return get_starting_cards(on_hand_auto, cards_all, card_map)
                 
-        
         # disregard console logs about own cards
         elif len(on_hand) > 0:
             if is_tower_battle:
@@ -223,7 +221,5 @@ def main(responseData:dict):
                 return "All cards drawn"
 
     except Exception as e:
-        return traceback.format_exc()
-
-        
+        return traceback.format_exc()        
 # %%
