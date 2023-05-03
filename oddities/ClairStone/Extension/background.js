@@ -7,6 +7,10 @@ let port = browser.runtime.connectNative("clairstone");
 
 // On a click on the browser action, send the app a message.
 browser.action.onClicked.addListener(() => {
+  browser.windows.create({
+    type: "detached_panel",
+    url: "about:devtools-toolbox?type=extension"
+  });
   console.log("Sending:  ping");
   port.postMessage("ping");  
 });

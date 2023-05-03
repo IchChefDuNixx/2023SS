@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "ClairStone",
-    "version": "1.0",
+    "version": "1.1",
     "description": "If you know, you know",
     "author": "IchChefDuNixx",
     "permissions":[
@@ -9,6 +9,7 @@
         "webRequestBlocking",
         "webRequestFilterResponse",
         "nativeMessaging",
+        "devtools",
         "tabs"
     ],
     "host_permissions": [
