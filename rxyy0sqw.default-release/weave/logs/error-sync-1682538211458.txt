@@ -1,0 +1,66 @@
+1682531691446	Sync.LogManager	DEBUG	Flushing file log
+1682531691448	Sync.LogManager	DEBUG	Log cleanup threshold time: 1681667691448
+1682531691450	Sync.LogManager	DEBUG	Done deleting files.
+1682531692458	Sync.SyncScheduler	DEBUG	Network link status changed to "changed". Offline?: false
+1682531695051	Sync.SyncScheduler	DEBUG	Network link status changed to "changed". Offline?: false
+1682531697871	Sync.SyncScheduler	DEBUG	Network link status changed to "changed". Offline?: false
+1682533824799	Sync.SyncScheduler	DEBUG	Network link status changed to "changed". Offline?: false
+1682533825319	Sync.SyncScheduler	DEBUG	Network link status changed to "changed". Offline?: false
+1682533826924	Sync.SyncScheduler	DEBUG	Network link status changed to "changed". Offline?: false
+1682533829665	Sync.SyncScheduler	DEBUG	Network link status changed to "changed". Offline?: false
+1682533831819	Sync.SyncScheduler	DEBUG	Network link status changed to "changed". Offline?: false
+1682533929295	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534079619	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534089248	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534093828	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534124848	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534145617	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534168462	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534193408	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534254251	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534266022	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534277867	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534288164	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534298903	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534341519	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534371850	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534398439	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534411990	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534417914	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534477637	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534513439	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534539892	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682534935838	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682535072084	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682535262145	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682535408140	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682535428194	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682535457134	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682535943671	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682536059506	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682536071301	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682536089415	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682536115243	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682536127049	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682536142442	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682536174135	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682536188215	addons.xpi	WARN	Addon with ID clair@stone.net already installed, older version will be disabled
+1682536408639	Sync.SyncScheduler	DEBUG	Network link status changed to "down". Offline?: false
+1682536408639	Sync.SyncScheduler	DEBUG	Clearing sync triggers and the global score.
+1682536408640	Sync.SyncScheduler	DEBUG	Clearing sync triggers and the global score.
+1682538211455	Sync.SyncScheduler	DEBUG	Network link status changed to "up". Offline?: false
+1682538211455	Sync.SyncScheduler	DEBUG	Network link looks up. Syncing.
+1682538211456	Sync.SyncScheduler	DEBUG	Clearing sync triggers and the global score.
+1682538211457	Sync.Service	DEBUG	User-Agent: Firefox/112.0.2 (Windows NT 10.0; Win64; x64) FxSync/1.114.0.20230424110519.desktop
+1682538211457	Sync.Service	INFO	Starting sync at 2023-04-26 21:43:31 in browser session MUhv509y4LVC
+1682538211457	Sync.Service	DEBUG	In sync: should login.
+1682538211457	Sync.Service	INFO	User logged in successfully - verifying login.
+1682538211457	Sync.SyncAuthManager	DEBUG	unlockAndVerifyAuthState has no FxA user
+1682538211457	Sync.Status	DEBUG	Status.login: error.login.reason.no_username => error.login.reason.no_username
+1682538211457	Sync.Status	DEBUG	Status.service: service.client_not_configured => service.client_not_configured
+1682538211457	Sync.Service	DEBUG	Fetching unlocked auth state returned error.login.reason.no_username
+1682538211457	Sync.ErrorHandler	ERROR	Sync encountered a login error
+1682538211457	Sync.SyncScheduler	DEBUG	Clearing sync triggers and the global score.
+1682538211457	Sync.SyncScheduler	DEBUG	Clearing sync triggers and the global score.
+1682538211458	Sync.Service	DEBUG	Exception calling WrappedLock: Error: Login failed: error.login.reason.no_username(resource://services-sync/service.sys.mjs:1026:15) JS Stack trace: onNotify@service.sys.mjs:1026:15
+1682538211458	Sync.Service	DEBUG	Not syncing: login returned false.
