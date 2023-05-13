@@ -25,6 +25,32 @@ def update_local_files():
     with open("cards_data/cards_all.json", "w", encoding="utf-8") as f:
         json.dump(all_dict, f)
 
+def deck_to_hashable(battle_data, df:pd.DataFrame, current_host, player_id):
+    # Add commander first
+    commander = {}
+    if current_host == player_id:
+        commander_data = battle_data["attack_commander"]
+    else:
+        commander_data = battle_data["defend_commander"]
+    commander = {"id":commander_data["unit_id"], "level":commander_data["level"], "runes":[]}
+
+    deck = []
+    for index, card in df.iterrows():
+        current_card = {}
+        current_card["id"] = card["unit_id"]
+        current_card["level"] = card["level"]
+        current_card["runes"] = card["runes"] # TODO: TEST skill_index
+        # {'1': {'item_id': '5185', 'slot': '1', 'skill_index': 2}} 
+        # {'1': {'item_id': '5114', 'slot': '1', 'skill_index': 2}} 
+        # {'1': {'item_id': '5013', 'slot': '1'}}  
+        deck.append(current_card)
+
+    hashable = {}
+    hashable["commander"] = commander
+    hashable["deck"] = deck
+    
+    return hashable
+
 # the following are for use inside main()
 def make_full_df(card_map, cards_all, item_data):
     df = pd.DataFrame.from_dict(card_map, orient="index")
@@ -34,33 +60,41 @@ def make_full_df(card_map, cards_all, item_data):
     except KeyError as e:
         missing_id = e.args[0]
         cards_all[missing_id] = [f"KeyError: {missing_id}", "cards_data/cards_KeyError.xml"] 
-        
+    
     # name: id -> string
     df["unit"] = df["unit_id"].apply(lambda x: cards_all[str(x)][0])
 
     # runes: dict -> description
     df["rune"] = df["runes"].apply(lambda x: item_data[x["1"]["item_id"]]["desc"].split(",")[0] if type(x) == dict else x)
-
-    # level: remove for non-champs
+    
+    # add card set (legacy, standard, champ, premium...)
     def _source_file_to_set(src:str):
         return src[17:src.index(".")]
     df["set"] = df["unit_id"].apply(lambda x: _source_file_to_set(cards_all[str(x)][1]))
-
-    df.loc[df["set"] != "shard", "level"] = ""
     
-    return df.reindex(["unit", "level", "rune", "cost"], axis=1)
-
-def show_opponent_deck(df, current_host):        
+    return df  
+    
+def show_opponent_deck(battle_data, full_df, current_host, player_id):        
     # TODO NOTE COMMENT FIXME BUG show dataframe containing remaining possible cards. eg deck - played ones or parse all turn in arena
+    toHash = {}
     
     # make dataframe of enemy deck
-    if current_host == "2753859001":
-        df = df.loc["101":]
+    if current_host == player_id:
+        df_opponent = full_df.loc["101":]
     else:
-        df = df.loc[:"101"]
+        df_opponent = full_df.loc[:"101"]
+    # full_df - df_opponent
+    df_player = full_df.drop(df_opponent.index)
+
+    toHash["opponent"] = deck_to_hashable(battle_data, df_opponent, current_host, player_id)
+    toHash["player"] = deck_to_hashable(battle_data, df_player, current_host, player_id)
+
+    # level: remove for non-champs
+    df_opponent.loc[df_opponent["set"] != "shard", "level"] = ""
     
+    df = df_opponent.reindex(["unit", "level", "rune", "cost"], axis=1)
+
     # print fancy table in console
-    df = df.reindex(["unit", "level", "rune", "cost"], axis=1)
     table = tabulate(df, headers="keys", tablefmt="orgtbl") # type: ignore
     
     # calc stats about deck
@@ -72,20 +106,20 @@ def show_opponent_deck(df, current_host):
     cost_distribution_str = " | ".join(str(v) for v in cost_distribution)
     deck_overview = f"Champs: {num_champs}\nmost used rune: {most_used_rune_count}\ncost distribution: {cost_distribution_str}"
 
-    return "opponent deck\n" + table + "\n" + deck_overview
+    return {"data":"opponent deck\n" + table + "\n" + deck_overview, "toHash":toHash}
 
 def get_starting_cards(on_hand, cards_all, card_map):        
     on_hand_str = "|| "
     for init_card in on_hand:
         on_hand_str += cards_all[card_map[str(init_card)]["unit_id"]][0] + " - "
-    return on_hand_str[:-3] + " ||"
+    return {"data":on_hand_str[:-3] + " ||"}
     
 def get_new_card(df:pd.DataFrame, on_hand):
     if len(on_hand) != 1:
-        return "DONTLOG"
+        return {"data":"DONTLOG"}
     new_card = df.loc[str(on_hand[0])]
-    unit, level, rune, cost = new_card.values
-    return f"{unit}"# {level, rune, cost}"
+    unit = new_card["unit"]
+    return {"data":f"{unit}"}# {level, rune, cost}"}
     
 def main(responseData:dict):
     try:
@@ -99,7 +133,7 @@ def main(responseData:dict):
         message = responseData["data"]
         # ping pong test
         if message == "ping":
-            return "pong"
+            return {"data":"pong"}
         
         url = responseData["url"]
         
@@ -118,7 +152,7 @@ def main(responseData:dict):
                 update_local_files()
                 
             # should be logged 15x
-            return "updating local files..."
+            return {"data":"updating local files..."}
         
         elif url.find("message=init") != -1:
             # it's not always sent
@@ -127,13 +161,17 @@ def main(responseData:dict):
                 with open("cards_data/item_data.json", "w", encoding="utf-8") as f:
                     json.dump(message_old["item_data"], f)
                 # should be logged 1x
-                return "updating local files..."
+                return {"data":"updating local files..."}
 
         msg_dict = json.loads(message)
         request_type = msg_dict["request"]["message"]
+        if request_type == "getLiveArenaRival":
+            return {"data": "DONTLOG"}
+        
+        player_id = msg_dict["request"]["user_id"] # 2753859001 == IchChefDuNixx
         # in arena, host is always the attacker
         if "battle_data" in msg_dict.keys() and "host_id" in msg_dict["battle_data"].keys():
-            current_host = msg_dict["battle_data"]["host_id"] # 2753859001 == IchChefDuNixx
+            current_host = msg_dict["battle_data"]["host_id"] 
         else:
             current_host = "0"
         
@@ -141,7 +179,7 @@ def main(responseData:dict):
             card_map = msg_dict["battle_data"]["card_map"]
             turn = msg_dict["battle_data"]["turn"]
         else:
-            return "DONTLOG"
+            return {"data":"DONTLOG"}
 
         # BUG: log stops posting after opponent goes autoplay? probably fixed
         # NOTE: only working for placement? and arena
@@ -172,12 +210,12 @@ def main(responseData:dict):
                 
         # only once, prevent going to next if statement
         if i == 1:
-            return show_opponent_deck(full_df, current_host)
+            return show_opponent_deck(msg_dict["battle_data"], full_df, current_host, player_id)
         
         # NOTE: only in arena so far?
         # initial 3 cards
         if len(on_hand) == 3:
-            if (current_host == "2753859001"): # me starting, ignore 1-15
+            if (current_host == player_id): # me starting, ignore 1-15
                 if on_hand[0] >= 100:
                     return get_starting_cards(on_hand, cards_all, card_map)
                 else:
@@ -192,9 +230,9 @@ def main(responseData:dict):
         # disregard console logs about own cards
         elif len(on_hand) > 0:
             if is_tower_battle:
-                return "DONTLOG"
+                return {"data":"DONTLOG"}
             
-            elif current_host == "2753859001": # me starting, ignore 1-15
+            elif current_host == player_id: # me starting, ignore 1-15
                 if on_hand[0] >= 100:
                     return get_new_card(full_df, on_hand)
                 else:
@@ -210,16 +248,16 @@ def main(responseData:dict):
             # condition for when victory is guaranteed
             # possible to move up to display each fight
             if i >= 1 and len(turn[str(i-1)]) == 0:
-                return "WON!"
+                return {"data":"WON!"}
             
             # (maybe) condition for guaranteed defeat. but also for arena every round
             if i >= 2 and len(turn[str(i-2)]) == 0:
-                return "DONTLOG"
+                return {"data":"DONTLOG"}
           
             # at the end of a long fight
             if len(on_hand) == 0:
-                return "All cards drawn"
+                return {"data":"All cards drawn"}
 
     except Exception as e:
-        return traceback.format_exc()        
+        return {"data":traceback.format_exc()}  
 # %%

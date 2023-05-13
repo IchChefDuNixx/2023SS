@@ -12,18 +12,47 @@ browser.action.onClicked.addListener(() => {
     type: "detached_panel",
     url: "about:devtools-toolbox?type=extension"
   });
-  console.log("Sending:  ping");
-  port.postMessage("ping");  
+  console.log("Sending: ping");
+  port.postMessage({data:"ping"});  
 });
 
 // Listen for messages from the app.
 port.onMessage.addListener(function(message) {
 
-  if (message != "DONTLOG") {
+  if (message.data != "DONTLOG") {
     // Handle the completion message here
-    console.log("Python script completed with message:", message);
+    console.log("Python script completed with message:", message.data);
   }
-  
+
+  if (message.toHash) {
+    // hash_encode({commander:{id:431,level:6,runes:[]}, deck:[{id:26133,level:6,runes:[]}]})
+    if (message.toHash) {
+      const numsims = 10000;
+      const bges = "164,165";
+      const use_tower = true;
+
+      let deck1;
+      fetch('http://localhost:3000?hashable=' + JSON.stringify(message.toHash.player), {mode: 'cors'})
+      .then(response => response.text())
+      .then(result => {
+        deck1 = result;
+        return fetch('http://localhost:3000?hashable=' + JSON.stringify(message.toHash.opponent), {mode: 'cors'})
+      })
+      .then(response => response.text())
+      .then(result => {
+        const deck2 = result;
+        return fetch(`http://localhost:3001?deck1=${deck1}&deck2=${deck2}&use_tower=${use_tower}&bges=${bges}&numsims=${numsims}`);
+      })
+      .then(response => response.text())
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      })
+    }
+  }
+
   // show(message);
 
 });

@@ -8726,6 +8726,14 @@
 		<card_id>26306</card_id>
 		<resource card_id="16306" number="2"/>
 	</fusion_recipe>
+	<fusion_recipe>
+		<card_id>16307</card_id>
+		<resource card_id="6307" number="2"/>
+	</fusion_recipe>
+	<fusion_recipe>
+		<card_id>26307</card_id>
+		<resource card_id="16307" number="2"/>
+	</fusion_recipe>
 
 <!-- END CHAOS PREMIUM SET -->
 
@@ -11483,6 +11491,15 @@
 	<fusion_recipe>
 		<card_id>27310</card_id>
 		<resource card_id="17310" number="2"/>
+	</fusion_recipe>
+
+	<fusion_recipe>
+		<card_id>17311</card_id>
+		<resource card_id="7311" number="2"/>
+	</fusion_recipe>
+	<fusion_recipe>
+		<card_id>27311</card_id>
+		<resource card_id="17311" number="2"/>
 	</fusion_recipe>
 	
 
