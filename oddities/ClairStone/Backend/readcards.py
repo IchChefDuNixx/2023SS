@@ -119,6 +119,7 @@ def get_new_card(df:pd.DataFrame, on_hand):
         return {"data":"DONTLOG"}
     new_card = df.loc[str(on_hand[0])]
     unit = new_card["unit"]
+    # find id in 1-115
     return {"data":f"{unit}"}# {level, rune, cost}"}
     
 def main(responseData:dict):
