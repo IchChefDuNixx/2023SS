@@ -33,10 +33,8 @@ port.onMessage.addListener(function (message) {
             var hand = []
             if (message.hand) {
                 hand = message.hand;
-            } else {
-                hand = [5,6,7];
-            }
-            playerIsHost = message.playerIsHost
+            } 
+            isArena = !message.playerIsHost
 
             let deck1;
             fetch('http://localhost:3000/hash?hashable=' + JSON.stringify(message.toHash.player), { mode: 'cors' })
@@ -48,17 +46,13 @@ port.onMessage.addListener(function (message) {
                 .then(response => response.text())
                 .then(result => {
                     let deck2 = result;
-                    // TODO: return this value from readcards.py
-                    // also handle sim.js to track the opponent's first pick, not the player's
-                    // if (!message.playerIsHost) {
-                    //     const tempDeck = deck1;
-                    //     deck1 = deck2;
-                    //     deck2 = tempDeck;
-                    // }
-                    // // TODO: return this value from readcards.py
-                    // if (message.requestType && message.requestType == "arena") {
-                    //     bges += "521";
-                    // }
+
+                    if (isArena) {
+                        const tempDeck = deck1;
+                        deck1 = deck2;
+                        deck2 = tempDeck;
+                        bges += "521";
+                    }
                     return fetch(`http://localhost:3000/sim?deck1=${deck1}&deck2=${deck2}&use_tower=${use_tower}&bges=${bges}&numsims=${numsims}&hand=${hand}`);
 
                 })

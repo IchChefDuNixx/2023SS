@@ -26,14 +26,14 @@ def update_local_files():
         json.dump(all_dict, f)
 
 
-def deck_to_hashable(battle_data, df: pd.DataFrame, current_host, player_id):
+def deck_to_hashable(battle_data, df: pd.DataFrame, isPlayerHost):
     # remove tower
     if len(df) == 16:
         df.drop(df.index.max(), inplace=True)
 
     # Add commander first
     commander = {}
-    if current_host == player_id:
+    if isPlayerHost:
         commander_data = battle_data["attack_commander"]
     else:
         commander_data = battle_data["defend_commander"]
@@ -99,24 +99,24 @@ def make_full_df(card_map, cards_all, item_data):
 
 
 def show_opponent_deck(
-    battle_data, full_df:pd.DataFrame, current_host, player_id, is_tower_battle, bges, on_hand
+    battle_data, full_df:pd.DataFrame, isPlayerHost, is_tower_battle, bges, on_hand
 ):
     # TODO NOTE COMMENT FIXME BUG show dataframe containing remaining possible cards. eg deck - played ones or parse all turn in arena
     toHash = {}
-    playerIsHost = True
+    isPlayerHost = True
     # make dataframe of enemy deck
-    if current_host == player_id:
+    if isPlayerHost:
         df_opponent = full_df.loc["101":]
     else:
         df_opponent = full_df.loc[:"101"]
-        playerIsHost = False
+        isPlayerHost = False
     # full_df - df_opponent
     df_player = full_df.drop(df_opponent.index)
 
     toHash["opponent"] = deck_to_hashable(
-        battle_data, df_opponent, current_host, player_id
+        battle_data, df_opponent, isPlayerHost
     )
-    toHash["player"] = deck_to_hashable(battle_data, df_player, current_host, player_id)
+    toHash["player"] = deck_to_hashable(battle_data, df_player, isPlayerHost)
 
     # level: remove for non-champs
     df_opponent.loc[df_opponent["set"] != "shard", "level"] = ""
@@ -146,7 +146,7 @@ def show_opponent_deck(
         "is_tower_battle": is_tower_battle,
         "bges": bges,
         "hand": hand,
-        "playerIsHost": playerIsHost
+        "isPlayerHost": isPlayerHost
     }
 
 
@@ -228,6 +228,8 @@ def main(responseData: dict):
             turn = msg_dict["battle_data"]["turn"]
         else:
             return {"data": "DONTLOG"}
+        
+        isPlayerHost = (player_id == current_host)
 
         # BUG: log stops posting after opponent goes autoplay? probably fixed
         # NOTE: only working for placement? and arena
@@ -265,22 +267,31 @@ def main(responseData: dict):
             # "WON"
 
         # only once, prevent going to next if statement
-        if i == 1:
-            # TODO: try to read own hand
+        if isPlayerHost and i == 1:
             return show_opponent_deck(
                 msg_dict["battle_data"],
                 full_df,
-                current_host,
-                player_id,
+                isPlayerHost,
+                is_tower_battle,
+                bges,
+                on_hand,
+            )
+        # read hand if opponent in arena starts
+        # TODO: TECT
+        elif not isPlayerHost and i == 2:
+            return show_opponent_deck(
+                msg_dict["battle_data"],
+                full_df,
+                isPlayerHost,
                 is_tower_battle,
                 bges,
                 on_hand,
             )
 
-        # NOTE: only in arena so far?
+        # NOTE: only in arena
         # initial 3 cards
         if len(on_hand) == 3:
-            if current_host == player_id:  # me starting, ignore 1-15
+            if isPlayerHost:  # me starting, ignore 1-15
                 if on_hand[0] >= 100:
                     return get_starting_cards(on_hand, cards_all, card_map)
                 else:
@@ -297,7 +308,7 @@ def main(responseData: dict):
             if is_tower_battle:
                 return {"data": "DONTLOG"}
 
-            elif current_host == player_id:  # me starting, ignore 1-15
+            elif isPlayerHost:  # me starting, ignore 1-15
                 if on_hand[0] >= 100:
                     return get_new_card(full_df, on_hand)
                 else:
