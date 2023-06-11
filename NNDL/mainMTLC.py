@@ -15,7 +15,7 @@ from typing import List
 # parameters
 @dataclass
 class HyperParams:
-    n_epochs: int = 3
+    n_epochs: int = 5
     batch_size_train: int = 64
     batch_size_test: int = 1000
     learning_rate: float = 0.01
@@ -43,22 +43,71 @@ class Net(nn.Module):
         # 24x24x10 out
         self.conv1 = nn.Sequential(
             nn.Conv2d(1, 10, kernel_size=(5, 5)),  # default: stride=1, no padding
+            nn.ReLU()
+            # nn.MaxPool2d(4, 4)  # 24x24 -> 6x6 after pooling
+        )
+
+        self.conv2 = nn.Sequential(
+            nn.Conv2d(10, 10, kernel_size=(3, 3), stride=1, padding=1),
             nn.ReLU(),
-            nn.MaxPool2d(4, 4)  # 24x24 -> 6x6 after pooling
+            nn.MaxPool2d(2, 2)
+        )
+
+        self.conv3 = nn.Sequential(
+            nn.Conv2d(10, 10, kernel_size=(3, 3), stride=1, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(2, 2)
         )
 
         # this conv will be combined with pooling by factor 4 -> reduces tensor size to 6x6x10 = 360 dim input vector
         # linear transformation: 360 dim input vector to 10 dim output (= number of classes)
-        self.fcblock = nn.Sequential(
+        self.fcblock1 = nn.Sequential(
             nn.Flatten(),
+            nn.Linear(360,360),
+            nn.ReLU(),
+            nn.Dropout(),
             nn.Linear(360, 10),
             # softmax output is computed together with loss
         )
 
+        self.conv4 = nn.Sequential(
+            nn.Conv2d(3, 20, kernel_size=(5, 5), stride=(1, 1), padding=2),
+            nn.ReLU()
+        )
+
+        self.conv5 = nn.Sequential(
+            nn.Conv2d(20, 20, kernel_size=(3, 3), padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(2, 2)
+        )
+
+        self.conv6 = nn.Sequential(
+            nn.Conv2d(20, 10, kernel_size=(3, 3), padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(2, 2)
+        )
+
+        self.fcblock2 = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(640, 640),
+            nn.ReLU(),
+            nn.Dropout(),
+            nn.Linear(640, 10)
+        )
+
     # forward pass through the network - this is the actual structure
-    def forward(self, x):
-        x = self.conv1(x)
-        x = self.fcblock(x)
+    # def forward(self, x): # MNIST
+    #     x = self.conv1(x)
+    #     x = self.conv2(x)
+    #     x = self.conv3(x)
+    #     x = self.fcblock1(x)
+    #     return x
+
+    def forward(self, x): # CIFAR10
+        x = self.conv4(x)
+        x = self.conv5(x)
+        x = self.conv6(x)
+        x = self.fcblock2(x)
         return x
 
 def train(epoch, network, optimizer, hyper_params, train_loader, lossplotdata):
@@ -109,8 +158,10 @@ def main():
     # disable randomization for easier testing
     # comment out the following lines for random init
     random_seed = 1
-    torch.backends.cudnn.enabled = False
-    torch.manual_seed(random_seed)
+    torch.backends.cudnn.enabled = True
+    # torch.manual_seed(random_seed)
+    device = torch.device("cuda:0" if torch.cuda.is_available() else 'cpu')
+    print(device)
 
     # want to use multi-threading? -> set to True
     multi_thread = True
@@ -128,24 +179,38 @@ def main():
     # 0.1307 is the mean of all MNIST images
     # 0.3081 is the std deviation of all MNIST images
     # there is only a single channel (you can pass the means/stddevs for each channel separated by comma
-    transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize(mean=(0.1307,), std=(0.3081,)), ])
+    # transform1 = transforms.Compose([transforms.ToTensor(), transforms.Normalize(mean=(0.1307,), std=(0.3081,)), ])
+    transform2 = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
     # load training data set
-    mnist_trainset = datasets.MNIST(root='./data', train=True, download=True, transform=transform)
+    # mnist_trainset = datasets.MNIST(root='./data', train=True, download=True, transform=transform1)
+    cifar10_trainset = datasets.CIFAR10(root="./data", train=True, download=True, transform=transform2)
 
     # split into training and validation set
     # done deterministically here; you can replace this by random_split() if you like
-    mnist_valset = torch.utils.data.Subset(mnist_trainset, range(50000, 60000))
-    mnist_trainset = torch.utils.data.Subset(mnist_trainset, range(0, 50000))
+    # mnist_valset = torch.utils.data.Subset(mnist_trainset, range(50000, 60000))
+    # mnist_trainset = torch.utils.data.Subset(mnist_trainset, range(0, 50000))
 
-    train_loader = torch.utils.data.DataLoader(mnist_trainset, batch_size=hyper_params.batch_size_train, shuffle=True,
+    # mnist_trainset, mnist_valset = torch.utils.data.random_split(mnist_trainset, [50000, 10000], torch.Generator())
+
+    # train_loader = torch.utils.data.DataLoader(mnist_trainset, batch_size=hyper_params.batch_size_train, shuffle=True,
+    #                                            num_workers=usenumthreads)
+    # val_loader = torch.utils.data.DataLoader(mnist_valset, batch_size=hyper_params.batch_size_test, shuffle=True,
+    #                                          num_workers=usenumthreads)
+
+    cifar10_trainset, cifar10_valset = torch.utils.data.random_split(cifar10_trainset, [40000, 10000], torch.Generator())
+
+    train_loader = torch.utils.data.DataLoader(cifar10_trainset, batch_size=hyper_params.batch_size_train, shuffle=True,
                                                num_workers=usenumthreads)
-    val_loader = torch.utils.data.DataLoader(mnist_valset, batch_size=hyper_params.batch_size_test, shuffle=True,
+    val_loader = torch.utils.data.DataLoader(cifar10_valset, batch_size=hyper_params.batch_size_test, shuffle=True,
                                              num_workers=usenumthreads)
 
     # load test data set
-    mnist_testset = datasets.MNIST(root='./data', train=False, download=True, transform=transform)
-    test_loader = torch.utils.data.DataLoader(mnist_testset, batch_size=hyper_params.batch_size_test, shuffle=True)
+    # mnist_testset = datasets.MNIST(root='./data', train=False, download=True, transform=transform1)
+    # test_loader = torch.utils.data.DataLoader(mnist_testset, batch_size=hyper_params.batch_size_test, shuffle=True)
+
+    cifar10_testset = datasets.CIFAR10(root="./data", train=False, download=True, transform=transform2)
+    test_loader = torch.utils.data.DataLoader(cifar10_testset, batch_size=hyper_params.batch_size_test, shuffle=True)
 
     # show some example images
     examples = enumerate(test_loader)
