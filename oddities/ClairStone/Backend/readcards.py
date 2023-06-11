@@ -26,22 +26,34 @@ def update_local_files():
         json.dump(all_dict, f)
 
 
-def deck_to_hashable(battle_data, df: pd.DataFrame, isPlayerHost):
+def deck_to_hashable(battle_data, df: pd.DataFrame, isPlayerHost, isOpponent=False):
     # remove tower
     if len(df) == 16:
         df.drop(df.index.max(), inplace=True)
 
-    # Add commander first
-    commander = {}
-    if isPlayerHost:
-        commander_data = battle_data["attack_commander"]
+    if not isOpponent:
+        # Add commander first
+        commander = {}
+        if isPlayerHost:
+            commander_data = battle_data["attack_commander"]
+        else:
+            commander_data = battle_data["defend_commander"]
+        commander = {
+            "id": commander_data["unit_id"],
+            "level": commander_data["level"],
+            "runes": [],
+        }
     else:
-        commander_data = battle_data["defend_commander"]
-    commander = {
-        "id": commander_data["unit_id"],
-        "level": commander_data["level"],
-        "runes": [],
-    }
+        commander = {}
+        if not isPlayerHost:
+            commander_data = battle_data["attack_commander"]
+        else:
+            commander_data = battle_data["defend_commander"]
+        commander = {
+            "id": commander_data["unit_id"],
+            "level": commander_data["level"],
+            "runes": [],
+        }
 
     deck = []
     for index, card in df.iterrows():
@@ -99,7 +111,7 @@ def make_full_df(card_map, cards_all, item_data):
 
 
 def show_opponent_deck(
-    battle_data, full_df:pd.DataFrame, isPlayerHost, is_tower_battle, bges, on_hand
+    battle_data, full_df: pd.DataFrame, isPlayerHost, is_tower_battle, bges, on_hand
 ):
     # TODO NOTE COMMENT FIXME BUG show dataframe containing remaining possible cards. eg deck - played ones or parse all turn in arena
     toHash = {}
@@ -113,16 +125,24 @@ def show_opponent_deck(
     # full_df - df_opponent
     df_player = full_df.drop(df_opponent.index)
 
-    toHash["opponent"] = deck_to_hashable(
-        battle_data, df_opponent, isPlayerHost
-    )
-    toHash["player"] = deck_to_hashable(battle_data, df_player, isPlayerHost)
+    if isPlayerHost:
+        toHash["opponent"] = deck_to_hashable(
+            battle_data, df_opponent, isPlayerHost, isOpponent=True
+        )
+        toHash["player"] = deck_to_hashable(battle_data, df_player, isPlayerHost)
+    else:
+        toHash["player"] = deck_to_hashable(battle_data, df_opponent, isPlayerHost)
+        toHash["opponent"] = deck_to_hashable(
+            battle_data, df_player, isPlayerHost, isOpponent=True
+        )
 
     # level: remove for non-champs
     df_opponent.loc[df_opponent["set"] != "shard", "level"] = ""
 
     # on_hand int[] -> hand str[]
-    hand = df_player.loc[df_player.index.isin([str(oh) for oh in on_hand]), 'unit'].tolist()
+    hand = df_player.loc[
+        df_player.index.isin([str(oh) for oh in on_hand]), "unit"
+    ].tolist()
 
     df = df_opponent.reindex(["unit", "level", "rune", "cost"], axis=1)
 
@@ -146,7 +166,7 @@ def show_opponent_deck(
         "is_tower_battle": is_tower_battle,
         "bges": bges,
         "hand": hand,
-        "isPlayerHost": isPlayerHost
+        "isPlayerHost": isPlayerHost,
     }
 
 
@@ -205,8 +225,15 @@ def main(responseData: dict):
             if "item_data" in message_old.keys():
                 with open("cards_data/item_data.json", "w", encoding="utf-8") as f:
                     json.dump(message_old["item_data"], f)
-                # should be logged 1x
-                return {"data": "updating local files..."}
+            if "user_items" in message_old.keys():
+                with open("cards_data/user_items.json", "w", encoding="utf-8") as f:
+                    json.dump(message_old["user_items"], f)
+            if "user_units" in message_old.keys():
+                with open("cards_data/user_units.json", "w", encoding="utf-8") as f:
+                    json.dump(message_old["user_units"], f)
+            # should be logged 1x
+            return {"data": "updating local files..."}
+
 
         msg_dict = json.loads(message)
         request_type = msg_dict["request"]["message"]
@@ -228,11 +255,13 @@ def main(responseData: dict):
             turn = msg_dict["battle_data"]["turn"]
         else:
             return {"data": "DONTLOG"}
-        
-        isPlayerHost = (player_id == current_host)
+
+        isPlayerHost = True
+        if player_id != current_host:
+            isPlayerHost = False
 
         # BUG: log stops posting after opponent goes autoplay? probably fixed
-        # NOTE: only working for placement? and arena
+        # NOTE: only working for arena
         # hand cards
 
         on_hand = []
@@ -242,14 +271,23 @@ def main(responseData: dict):
         i = len(turn.keys())
         is_tower_battle = False
 
-        # atm -1 unique to tower battles (tower card 151)
-        if "-1" in turn.keys():
-            i = i - 2
-            is_tower_battle = True
+        # Deprecated
+        # # atm -1 unique to tower battles (tower card 151)
+        # if "-1" in turn.keys():
+        #     i = i - 2
+        #     is_tower_battle = True
 
         # TODO: use all personal bges, currently only those that count for both
         bgeKeys = msg_dict["battle_data"]["effect_ids"].keys()
-        bges = ",".join(str(key) for key in bgeKeys if len(key) <= 3)
+        bgeList = list(bgeKeys)
+        # bges = ",".join(str(key) for key in bgeKeys if len(key) <= 3)
+
+        if "501" in bgeList:
+            i = i - 2
+            is_tower_battle = True
+            bgeList.remove("501")
+
+        bges = ",".join(str(key) for key in bgeList if len(key) <= 3)
 
         full_df = make_full_df(card_map, cards_all, item_data)
 
