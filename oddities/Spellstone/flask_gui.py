@@ -8,7 +8,7 @@ import pandasgui
 
 
 def main():
-    df = flask_extractor.not_main(gui=True)
+    df = flask_extractor.main(gui=True)
     pandasgui.show(df)
 
 # %%
